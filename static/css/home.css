@@ -1,0 +1,106 @@
+body{
+    background: linear-gradient(90deg, rgba(3,141,116,1) 0%, rgba(9,80,144,1) 100%);
+    font-family: 'Poppins', sans-serif;
+}
+
+
+.container{
+    background-color: rgba(255, 255, 255, 0.9);
+    /* background-color: white; */
+    border-radius: 20px;
+    padding: 20px 35px;
+    margin: 20px;
+}
+
+.header{
+    display: flex;
+}
+
+.sambutan{
+    flex-direction: column;
+    width: 80%;
+}
+
+.profilepict{
+    padding-top: 10px;
+    flex-direction: column;
+    width: 20%;
+    text-align: right;
+    overflow: hidden;
+
+}
+
+.profilepict img {
+    width: 100px;
+    text-align: center;
+    object-fit: cover;
+}
+
+
+/* ISIAN */
+.isian{
+    display: flex;
+}
+
+.column{
+    flex-direction: column;
+    width: 50%;
+    margin: 20px;
+    padding: 20px;
+}
+
+.button{
+    display: flex;
+    /* flex-direction: row; */
+    vertical-align: middle;
+    align-items: center;
+}
+
+.iconmeals{
+    text-align: center;
+    background-color: #d2f0c5;
+    border-radius: 30px;
+    width: 150px;
+    height: 184px;
+    margin-right: 20px;
+    box-shadow: -0px 0px 10px rgb(190, 190, 190);
+}
+
+.button img{
+    width: 80%;
+    margin-top: 25px;
+}
+
+.button p{
+    font-size: 28px;
+}
+
+.detail{
+    text-align: justify;
+}
+
+
+.iconworkout{
+    text-align: center;
+    background-color: #ccd9f9;
+    border-radius: 30px;
+    width: 150px;
+    height: 184px;
+    margin-right: 20px;
+    box-shadow: 0px 0px 10px rgb(190, 190, 190);
+}
+
+.iconmeals:hover{
+    box-shadow: 0px 0px 15px 5px rgb(190, 190, 190);
+    transition: 500ms;
+}
+
+.iconworkout:hover{
+    box-shadow: 0px 0px 15px 5px rgb(190, 190, 190);
+    transition: 500ms;
+}
+
+/* .profilepict img:hover {
+    box-shadow: 0px 0px 15px 5px rgb(190, 190, 190);
+    transition: 500ms;
+} */

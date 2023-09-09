@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/loading.css') }}">
+
+    <link rel="icon" href="{{ url_for('static', filename='css/Assets/LOGO.png') }}">
+    <title>LifeWell</title>
+
+    
+</head>
+<body>
+    
+    <div class="container">
+        <div class="text">
+            <h3>LifeWell</h3>
+
+        </div>
+
+        <div class="loading">
+            <div class="line-box">
+                <div class="line"></div>
+            </div>
+        </div>
+
+    </div>
+<script src="{{ url_for('static', filename='js/loading.js') }}"></script>
+
+</body>
+</html>

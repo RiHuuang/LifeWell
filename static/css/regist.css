@@ -1,0 +1,18 @@
+body{
+    background: linear-gradient(90deg, rgb(33, 182, 155) 0%, rgb(40, 112, 174) 100%);
+    font-family: 'Poppins', sans-serif, 'weight: 50%;';
+}
+
+.ISI {
+    align-items: center;
+    align-content: center;
+    background-color: rgba(245, 245, 245, 50);
+    border-radius: 15px;
+
+}
+
+.JUDUL {
+    color: black;
+    text-align: center;
+    
+}

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/summary.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='css/Assets/LOGO.png') }}">
+    <title>LifeWell</title>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1>🗒️ Your body need...</h1>
+        </div>
+
+        <!-- BAGIAN INI YANG BISA GANTI GANTI -->
+        <div class="isian">
+            <div class="column">
+                <div class="needed" id="box1">
+                    <img src="{{ url_for('static', filename='css/Assets/water.png') }}" alt="" id="iconneeded">
+                    
+                    <div class="textbox">
+                        <h2 id="ganti" name="gantiWater">2L</h2>
+                        <p id="judulnya"> Water </p>
+                    </div>
+                </div>
+
+                <div class="needed" id="box2">
+                    <img src="{{ url_for('static', filename='css/Assets/Carbs.png') }}" alt="" id="iconneeded">
+                    
+                    <div class="textbox">
+                        <h2 id="ganti" name="gantiCarbs">2L</h2>
+                        <p id="judulnya"> Carbs </p>
+                    </div>
+                </div>
+
+                <div class="needed" id="box3">
+                    <img src="{{ url_for('static', filename='css/Assets/protein.png') }}" alt="" id="iconneeded">
+                    
+                    <div class="textbox">
+                        <h2 id="ganti" name="gantiProtein">2L</h2>
+                        <p id="judulnya"> Protein </p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="column">
+                <div class="needed" id="box4">
+                    <img src="{{ url_for('static', filename='css/Assets/vitamin.png') }}" alt="" id="iconneeded">
+                    
+                    <div class="textbox">
+                        <h2 id="ganti" name="gantiVitamin">2L</h2>
+                        <p id="judulnya"> Vitamin </p>
+                    </div>
+                </div>
+
+                <div class="needed" id="box5">
+                    <img src="{{ url_for('static', filename='css/Assets/fat.png') }}" alt="" id="iconneeded">
+                    
+                    <div class="textbox">
+                        <h2 id="ganti" name="gantiFat">2L</h2>
+                        <p id="judulnya"> Fat </p>
+                    </div>
+                </div>
+
+                <div class="needed" id="box6">
+                    <img src="{{ url_for('static', filename='css/Assets/minerak.png') }}" alt="" id="iconneeded">
+                    
+                    <div class="textbox">
+                        <h2 id="ganti" name="gantiMineral">2L</h2>
+                        <p id="judulnya"> Mineral </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="button">
+        <a href="{{ url_for('daily_meals') }}">
+        <button id="nextpage">Next</button>
+        </a>
+    </div>
+    
+</body>
+</html>

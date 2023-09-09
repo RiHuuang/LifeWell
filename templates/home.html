@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='css/Assets/LOGO.png') }}">
+    <title>LifeWell</title>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="sambutan">
+                <h1>Hello, Huank</h1>
+
+                <h3>Don’t forget to drink water 💦</h3>
+            </div>
+
+            <div class="profilepict">
+                <a href="{{ url_for('profile') }}">
+                    <img src="{{ url_for('static', filename='css/Assets/PROFPICT.png') }}" alt="">
+                </a>
+            </div>
+
+        </div>
+
+        <div class="isian">
+            <div class="column">
+                <div class="button">
+                    <a href="{{ url_for('calculate') }}">
+                        <div class="iconmeals">
+                            <img src="{{ url_for('static', filename='css/Assets/Meal.png') }}" alt="">
+                        </div>
+                    </a>
+                    <p><b>Meals</b></p>
+                </div>
+
+                <div class="detail">
+                    <p id="penjelasan">
+                        Regular meals and snacks allow for more opportunities in the day to give our body the energy and nutrients it needs to function optimally, allowing us to engage in all the things we need to do in the day. 
+                    </p>
+                </div>
+            </div>
+            <div class="column">
+                <div class="button">
+                    <div class="iconworkout">
+                        <img src="{{ url_for('static', filename='css/Assets/Workout.png') }}" alt="">
+                    </div>
+                    <p><b>Workout</b></p>
+                </div>
+
+                <div class="detail">
+                    <p id="penjelasan">
+                        Being physically active can improve your brain health, help manage weight, reduce the risk of disease, strengthen bones and muscles, and improve your ability to do everyday activities.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    
+</body>
+
+</html>

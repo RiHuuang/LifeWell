@@ -1,0 +1,92 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins" rel="stylesheet">
+
+        <title>BMI Calculator</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename = 'css/calc.css') }}">
+
+        </head>
+        <body>
+            <div class="container">
+                <h1>BMI CALCULATOR</h1>
+                
+                <form class="calculator">
+                    <div>
+                        <label for="weight">WEIGHT (kg)</label>
+                        <input type="number" id="weight" min="0" step = "0.01" value="0" name="input_berat"/>
+                    </div>
+
+                    <div>
+                        <label for="height">HEIGHT (cm)</label>
+                        <input type="number" id="height" min="0" step = "0.01" value="0" name="input_tinggi"/>
+                    </div>
+                    
+                    <div>
+                        <button type="reset">Reset</button>
+                        <button type="submit">Submit</button>
+                    </div>
+
+                </form>
+
+                <section class="output">
+                    <h3>YOUR BMI IS</h3>
+                    <!-- <p id ="bmi">0</p> -->
+                    <!-- <p id="desc">N/A</p> -->
+                </section>
+
+            <div class="gauge">
+                <div class="gauge__body">
+                    <div class="gauge__fill"></div>
+                    <div class="gauge__fill2"></div>
+                    <div class="gauge__fill3"></div>
+                    <div class="gauge__fill4"></div>
+                    <div class="gauge__cover">
+                        <p id ="bmi" name="hasil_bmi">0</p>
+                        <p id="desc">N/A</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <section class="bmi-scale">
+                <!-- <div style="--color: var(--underweight)"> -->
+                <div>
+                    <h4>Underweight</h4>
+                    <p>&lt; 18.5</p>
+                </div>
+
+                <!-- <div style="--color: var(--normal)"> -->
+                <div>
+                    <h5>Normal</h5>
+                    <p>18.5 - 25</p>
+                </div>
+
+                <!-- <div style="--color: var(--overweight)"> -->
+                <div>
+                    <h2>Overweight</h2>
+                    <p>25 - 30</p>
+                </div>
+
+                <!-- <div style="--color: var(--obese)"> -->
+                <div>
+                    <h6>Obese</h6>
+                    <p>≥ 30</p>
+                </div>
+
+            </section>
+
+            </div>
+
+            <div class="button">
+                <a href="{{ url_for('summary') }}">
+                    <button id="nextpage">Next</button>
+                </a>
+            </div>
+
+            <script src = "{{ url_for('static', filename='js/script.js') }}" defer></script>
+        </body>
+    </html>

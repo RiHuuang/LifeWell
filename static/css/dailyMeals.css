@@ -1,0 +1,245 @@
+body {
+    display: grid;
+    place-items: center;
+    height: 100vh;
+    /* width: 100vw; */
+    background: linear-gradient(45deg, #38A491, #296AA5);
+}
+
+h1{
+    font-size: 32px;
+}
+
+h2{
+    margin-top: -12%;
+    font-size: 18px;
+
+}
+
+.main {
+    width: 100%;
+    height: 60vh;
+    max-width: 420px;
+    background: #fff;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 10px 15px (0,0,0,0.25);
+    display: grid;
+    gap: 1rem;
+}
+
+#timeFrame{
+    font-weight: bold;
+    padding-right: 18%;
+}
+
+.radio-container{
+    margin-top: -4%;
+    margin-bottom: 4%;
+}
+
+.targetCalories{
+    /* display: grid; */
+    gap: 1rem;
+    margin-bottom: 4%; 
+}
+
+.targetCalories div {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.targetCalories label {
+    flex: 0 1 120px;
+    font-weight: 600;
+} 
+
+.targetCalories input {
+    flex: 1;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 2px;
+    outline-color: #555;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.diet-container{
+    font-weight: bold;
+    margin-bottom: 4%;
+}
+
+.diet-container select{
+    margin-left: 27%;
+    width: 48.5%;
+    padding: 3px;
+}
+
+.allergy-container{
+    font-weight: bold;
+}
+
+.allergy-container input[type="text"] {
+    margin-left: 72px;
+    padding: 3px;
+    width: 48%;
+}
+
+
+input[type=text], select{
+    /* width: 50%; */
+    flex: 1;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 2px;
+    outline-color: #555;
+    text-align: center;
+    width: 50%;
+}
+
+label{
+    position: relative;
+    cursor: pointer;
+    padding-right: 32px;
+    
+}
+
+label:nth-last-child(1){
+    padding-right: 0;
+}
+
+.container button {
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    background: #038D74;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-right: 3%;
+}
+
+.container button[type="reset"] {
+    background: #444;
+}
+
+.container button:hover {
+    filter: brightness(120%);
+}
+
+.button{
+    margin-left: 60%;
+    width: 100%;
+    margin-top: 10%;
+}
+
+
+.alert {
+    position: relative;
+    padding: 1rem 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: .25rem
+}
+
+.alert-heading {
+    color: inherit
+}
+
+.alert-link {
+    font-weight: 700
+}
+
+.alert-dismissible {
+    padding-right: 3rem
+}
+
+.alert-dismissible .btn-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 2;
+    padding: 1.25rem 1rem
+}
+
+.alert-primary {
+    color: #084298;
+    background-color: #cfe2ff;
+    border-color: #b6d4fe
+}
+
+.alert-primary .alert-link {
+    color: #06357a
+}
+
+.alert-secondary {
+    color: #41464b;
+    background-color: #e2e3e5;
+    border-color: #d3d6d8
+}
+
+.alert-secondary .alert-link {
+    color: #34383c
+}
+
+.alert-success {
+    color: #0f5132;
+    background-color: #d1e7dd;
+    border-color: #badbcc
+}
+
+.alert-success .alert-link {
+    color: #0c4128
+}
+
+.alert-info {
+    color: #055160;
+    background-color: #cff4fc;
+    border-color: #b6effb
+}
+
+.alert-info .alert-link {
+    color: #04414d
+}
+
+.alert-warning {
+    color: #664d03;
+    background-color: #fff3cd;
+    border-color: #ffecb5
+}
+
+.alert-warning .alert-link {
+    color: #523e02
+}
+
+.alert-danger {
+    color: #842029;
+    background-color: #f8d7da;
+    border-color: #f5c2c7
+}
+
+.alert-danger .alert-link {
+    color: #6a1a21
+}
+
+.alert-light {
+    color: #636464;
+    background-color: #fefefe;
+    border-color: #fdfdfe
+}
+
+.alert-light .alert-link {
+    color: #4f5050
+}
+
+.alert-dark {
+    color: #141619;
+    background-color: #d3d3d4;
+    border-color: #bcbebf
+}
+
+.alert-dark .alert-link {
+    color: #101214
+}
