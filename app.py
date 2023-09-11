@@ -10,6 +10,33 @@ this_config = Config()
 app.secret_key= 'kelazz'
 
 
+def calculate_bmr(gender,weight, height, age):
+    if gender == "male":
+        bmr = 88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age)
+    elif gender == "female":
+        bmr = 447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age)
+    else:
+        raise ValueError("Gender must be 'male' or 'female'")
+    return bmr
+
+
+def calculate_daily_calories(bmr, activity_level):
+    activity_factors = {
+        "sedentary": 1.2,
+        "lightly_active": 1.375,
+        "moderately_active": 1.55,
+        "very_active": 1.725,
+        "super_active": 1.9
+    }
+
+    if activity_level in activity_factors:
+        daily_calories = bmr * activity_factors[activity_level]
+        return daily_calories
+    else:
+        raise ValueError("Invalid activity level")
+
+
+
 def get_meal_plan(timeFrame, targetCalories, diet, exclude):
     params = {
         'apiKey': this_config.API_KEY,
