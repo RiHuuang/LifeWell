@@ -7,9 +7,26 @@
 </head>
 <body>
     <h1>Ini get meal</h1>
-    {% for data in datas %}
-        <p>{{data[meals]}}</p>
+    <p>{{datas['meals']}}</p>
+
+    <h1>Ini get meal (2)</h1>
+    {% for meal in datas['meals'] %}
+    <h2>{{ meal['title'] }}</h2>
+    <p>ID: {{ meal['id'] }}</p>
+    <p>Ready in Minutes: {{ meal['readyInMinutes'] }}</p>
+    <p>Servings: {{ meal['servings'] }}</p>
+    <p>Source URL: <a href="{{ meal['sourceUrl'] }}">{{ meal['sourceUrl'] }}</a></p>
     {% endfor %}
 
+    <h1>Nutrients</h1>
+    <ul>
+        {% for nutrient, value in datas['nutrients'].items() %}
+        <li>
+            <strong>{{ nutrient }}:</strong> {{ value }}
+        </li>
+        {% endfor %}
+    </ul>
+
+    <button onClick="window.location.reload();">get new plan</button>
 </body>
 </html>

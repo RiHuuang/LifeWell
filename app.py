@@ -45,10 +45,16 @@ def get_meal_plan(timeFrame, targetCalories, diet, exclude):
         'diet': diet,
         'exclude': exclude
     }
+    # print("API KEY IS -> ",this_config.API_KEY)
     BASE_URL = this_config.URL_GENERATE_MEAL_PLAN
     response = requests.get(BASE_URL, params=params).json()
 
     return response
+
+def meal_query(query):
+    BASE_URL = this_config.URL_NPL_NINCAL
+    response = requests.get(
+        BASE_URL + query, headers={'X-Api-Key': this_config.X_API_KEY})
 
 @app.route("/")
 def main_routes():
@@ -77,13 +83,13 @@ def daily_meals():
         print("ini request form ", timeFrame, targetCalories, diet, exclude)
 
         check = True
-        # if timeFrame == '' or not timeFrame:
-        #     flash("Time frame couldn't be empty!", 'danger')
-        #     check = False
+        if timeFrame == '' or not timeFrame:
+            flash("Time frame couldn't be empty!", 'danger')
+            check = False
 
-        # if targetCalories == '' or not targetCalories:
-        #     flash("Target calories couldn't be empty", 'danger')
-        #     check = False
+        if targetCalories == '' or not targetCalories:
+            flash("Target calories couldn't be empty", 'danger')
+            check = False
 
         if not check:
             return redirect(url_for('daily_meals'))
@@ -100,10 +106,9 @@ def get_meal():
     diet = request.args.getlist('diet')
     exclude = request.args.getlist('exclude')
 
-    print("get_meals lengkapan nya",timeFrame,targetCalories,diet,exclude)
     datas = get_meal_plan(
         timeFrame=timeFrame, targetCalories=targetCalories, diet=diet, exclude=exclude)
-    print("INI DATAS DI GET_MEALS",datas)
+
     return render_template('get_meal_plan.html', datas=datas)
 
 @app.route('/summary')
