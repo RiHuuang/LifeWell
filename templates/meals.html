@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meals</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/displayMeals.css') }}
+    ">
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <h1>MEALS</h1>
+        </header>
+
+        <section class="columns">
+            <div class="column">
+                <h2>LOADED VEGGIE OMELET</h2>
+                <br>
+                <img src="download (4).jpeg" alt="deskripsi gambar" width="220" height="220">
+                <p>Ready in Minute : 45</p>
+                <p>Servings : 2</p>
+            </div>
+            <div class="column">
+                <h2>GNOCCI WITH VEGETABLES</h2>
+                <br>
+                <img src="download (4).jpeg" alt="deskripsi gambar" width="220" height="220">
+                <p>Ready in Minute : 20</p>
+                <p>Servings : 1</p>
+            </div>
+            <div class="column">
+                <h2>PAELLA CATALANE</h2>
+                <br>
+                <img src="download (4).jpeg" alt="deskripsi gambar" width="220" height="220">
+                <p>Ready in Minute : 45</p>
+                <p>Servings : 10</p>
+            </div>
+
+        </section>
+        <div class="button">
+            <a href="{{url_for('summary')}}">
+            <button id="nextpage">Next</button>
+            </a>
+        </div>
+    </div>
+    
+</body>
+</html>
