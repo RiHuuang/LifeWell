@@ -1,12 +1,20 @@
 import os
 
-# Get the current working directory (where your Python script is located)
-current_directory = os.path.dirname(os.path.realpath(__file__))
+api_key = os.environ.get('API_KEY')
 
-# Your Flask app's root directory is usually one level above the current directory
-root_directory = os.path.abspath(os.path.join(current_directory, '..'))
+if api_key is None:
+    raise ValueError("API_KEY environment variable is not set.")
 
-print("Root directory:", root_directory)
+# Now you can use the API_KEY in your code
+print(f"API_KEY: {api_key}")
+
+# # Get the current working directory (where your Python script is located)
+# current_directory = os.path.dirname(os.path.realpath(__file__))
+
+# # Your Flask app's root directory is usually one level above the current directory
+# root_directory = os.path.abspath(os.path.join(current_directory, '..'))
+
+# print("Root directory:", root_directory)
 
 """
 def get_meal_plan(timeFrame, targetCalories, diet, exclude):

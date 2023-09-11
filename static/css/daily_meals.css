@@ -8,17 +8,27 @@ body {
 
 h1{
     font-size: 32px;
+    /* background-color: red; */
 }
 
 h2{
-    margin-top: -12%;
-    font-size: 18px;
-
+    margin-top: 0%;
+    /* background-color: red; */
+    font-size: 1px;
+    
+}
+#hadua{
+    margin-top: -11%;
+    font-size: 16px;
+    margin-left: 2px;
 }
 
+#hoye{
+    font-weight: bold;
+}
 .main {
     width: 100%;
-    height: 60vh;
+    height: 65vh;
     max-width: 420px;
     background: #fff;
     padding: 1rem;
@@ -34,28 +44,34 @@ h2{
 }
 
 .radio-container{
-    margin-top: -4%;
     margin-bottom: 4%;
 }
 
-.targetCalories{
+.targetGoals{
     /* display: grid; */
     gap: 1rem;
     margin-bottom: 4%; 
+    font-weight: bold;
 }
 
-.targetCalories div {
+.targetGoals select{
+    margin-left: 23%;
+    width: 48.5%;
+    padding: 3px;
+}
+
+.targetGoals div {
     display: flex;
     align-items: center;
     gap: 1rem;
 }
 
-.targetCalories label {
+.targetGoals label {
     flex: 0 1 120px;
     font-weight: 600;
 } 
 
-.targetCalories input {
+.targetGoals input {
     flex: 1;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -83,7 +99,7 @@ h2{
 .allergy-container input[type="text"] {
     margin-left: 72px;
     padding: 3px;
-    width: 48%;
+    width: 47.3%;
 }
 
 
@@ -109,6 +125,10 @@ label:nth-last-child(1){
     padding-right: 0;
 }
 
+.container{
+    margin-top: -10%;
+}
+
 .container button {
     border-radius: 5px;
     border: none;
@@ -129,117 +149,31 @@ label:nth-last-child(1){
     filter: brightness(120%);
 }
 
-.button{
+.button-ihiy{
     margin-left: 60%;
     width: 100%;
     margin-top: 10%;
 }
 
-
-.alert {
-    position: relative;
-    padding: 1rem 1rem;
-    margin-bottom: 1rem;
-    border: 1px solid transparent;
-    border-radius: .25rem
+.button{
+    margin-left: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -5%;
 }
 
-.alert-heading {
-    color: inherit
+#nextpage{
+    border-radius: 10px;
+    width: 80px;
+    height: 40px;
+    font-size: 20px;
+    background-color: white;
+    border-width: 0;
+    cursor: pointer;
 }
 
-.alert-link {
-    font-weight: 700
-}
-
-.alert-dismissible {
-    padding-right: 3rem
-}
-
-.alert-dismissible .btn-close {
-    position: absolute;
-    top: 0;
-    right: 0;
-    z-index: 2;
-    padding: 1.25rem 1rem
-}
-
-.alert-primary {
-    color: #084298;
-    background-color: #cfe2ff;
-    border-color: #b6d4fe
-}
-
-.alert-primary .alert-link {
-    color: #06357a
-}
-
-.alert-secondary {
-    color: #41464b;
-    background-color: #e2e3e5;
-    border-color: #d3d6d8
-}
-
-.alert-secondary .alert-link {
-    color: #34383c
-}
-
-.alert-success {
-    color: #0f5132;
-    background-color: #d1e7dd;
-    border-color: #badbcc
-}
-
-.alert-success .alert-link {
-    color: #0c4128
-}
-
-.alert-info {
-    color: #055160;
-    background-color: #cff4fc;
-    border-color: #b6effb
-}
-
-.alert-info .alert-link {
-    color: #04414d
-}
-
-.alert-warning {
-    color: #664d03;
-    background-color: #fff3cd;
-    border-color: #ffecb5
-}
-
-.alert-warning .alert-link {
-    color: #523e02
-}
-
-.alert-danger {
-    color: #842029;
-    background-color: #f8d7da;
-    border-color: #f5c2c7
-}
-
-.alert-danger .alert-link {
-    color: #6a1a21
-}
-
-.alert-light {
-    color: #636464;
-    background-color: #fefefe;
-    border-color: #fdfdfe
-}
-
-.alert-light .alert-link {
-    color: #4f5050
-}
-
-.alert-dark {
-    color: #141619;
-    background-color: #d3d3d4;
-    border-color: #bcbebf
-}
-
-.alert-dark .alert-link {
-    color: #101214
+#nextpage:hover{
+    box-shadow: 0px 0px 5px 4px rgba(0, 0, 0, 0.25);
+    transition: 200ms;
 }

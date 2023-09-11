@@ -101,6 +101,7 @@ def daily_meals():
 
 @app.route("/get_meal", methods=['POST', 'GET'])
 def get_meal():
+    print("Masuk ke getmeal")
     timeFrame = request.args.getlist('timeFrame')
     targetCalories = request.args.getlist('targetCalories')
     diet = request.args.getlist('diet')
@@ -108,6 +109,7 @@ def get_meal():
 
     datas = get_meal_plan(
         timeFrame=timeFrame, targetCalories=targetCalories, diet=diet, exclude=exclude)
+    # print(datas)
 
     return render_template('get_meal_plan.html', datas=datas)
 

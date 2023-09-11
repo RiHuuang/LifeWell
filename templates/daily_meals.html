@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daily Meals</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/dailyMeals.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/daily_meals.css') }}">
     <link rel="icon" href="{{ url_for('static', filename='css/Assets/LOGO.png') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -26,53 +26,62 @@
     
     <div class="main">
     <h1>Generate Meal Plan</h1>
-    <h2><i>with three meals (breakfast, lunch, and dinner)</i></h2>
+    <h2 id="hadua"><i>with three meals (breakfast, lunch, and dinner)</i></h2>
 
-    <form class="container" method="POST" action="{{ url_for('daily_meals') }}">
+    <form class="container">
         <div class="radio-container">
             <span id="timeFrame">TIME FRAME</span>
-            <input type="radio" name="timeFrame" id="day" value="day"/>
+            <input type="radio" name="timeFrame" id="day" value=""/>
             <label for="day">Day</label>
-
-            <input type="radio" name="timeFrame" id="week" value="week"/>
+    
+            <input type="radio" name="timeFrame" id="week" value=""/>
             <label for="week">Week</label>
         </div>
         
-        <div class="targetCalories">
-            <label for="target">TARGET CALORIES</label>
-            <input type="number" id="calories" min="0" step = "0.1" value="0" name="targetCalories"/>
+        <div class="targetGoals">
+            <label for="goals" id = 'hoye'>GOALS</label>
+            <select id="goalsList" name="goals" required>
+                <option value = ""> Select Activity</option>
+                <option value = "maintain" name = "maintain"> Maintain Weight</option>
+                <option value = "mildWeightLoss" name = "mildWeightLoss"> Mild Weight Loss</option>
+                <option value = "weightLoss" name = "weightLoss"> Weight Loss</option>
+                <option value = "extremeLoss" name = "extremeLoss"> Extreme Weight Loss</option>
+                <option value = "mildWeightGain" name = "mildWeightGain"> Mild Weight Gain</option>
+                <option value = "weightGain" name = "weightGain"> Weight Gain</option>
+                <option value = "fastWeightGain" name = "fastWeightGain"> Fast Weight Gain</option>
+            </select>
         </div>
-
+    
         <div class="diet-container">
             <label for="diet">DIET</label>
             <select id="dietlist" name="diet" required>
                 <option value = ""> Select Diet</option>
-                <option value = "Gluten free"> Gluten Free</option>
-                <option value = "Ketogenic"> Ketogenic</option>
-                <option value = "Vegetarian"> Vegetarian</option>
-                <option value = "Lacto-vegetarian"> Lacto-Vegetarian</option>
-                <option value = "Ovo-vegetarian"> Ovo-Vegetarian</option>
-                <option value = "Vegan"> Vegan</option>
-                <option value = "Pescetarian"> Pescetarian</option>
-                <option value = "Paleo"> Paleo</option>
+                <option value = "gluten_free"> Gluten Free</option>
+                <option value = "ketogenic"> Ketogenic</option>
+                <option value = "vegetarian"> Vegetarian</option>
+                <option value = "lacto_vegetarian"> Lacto-Vegetarian</option>
+                <option value = "ovo-vegetarian"> Ovo-Vegetarian</option>
+                <option value = "vegan"> Vegan</option>
+                <option value = "pescetarian"> Pescetarian</option>
+                <option value = "paleo"> Paleo</option>
                 <option value = "Primal"> Primal</option>
-                <option value = "Low FODMAP"> Low FODMAP</option>
+                <option value = "Low_FODMAP"> Low FODMAP</option>
                 <option value = "Whole30"> Whole30</option>
-                <option value = ""> None</option>
+                <option value = "None"> None</option>
             </select>
         </div>
-
+    
         <div class="allergy-container">
             <label for="allergy">ALLERGY</label>
             <input type="text" id="allergy" placeholder="Can be more than one (using ',')" required name="exclude" onclick="clearPlaceholder(this)">
         </div>
-
-        <div class = "button">
+    
+        <div class = "button-ihiy">
             <button type="reset">Reset</button>
             <button type="submit">Submit</button>
         </div>
-
-    </form>
+    
+        </form>
       
     </div> 
 
