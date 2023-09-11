@@ -43,40 +43,40 @@ def daily_meals():
 
     if request.method == 'POST':
         print('jalan')
-        timeFrame = request.form.get('timeFrame')
-        targetCalories = request.form.get('targetCalories')
-        diet = request.form.get('diet')
-        exclude = request.form.get('exclude')
-        # kalo multiple exclude pake (',')
-        # list(map(str, userPreference.allergies.data.split(',')))
-
-        timeFrame = request.args.getlist('timeFrame')
-        targetCalories = request.args.getlist('targetCalories')
-        diet = request.args.getlist('diet')
-        exclude = request.args.getlist('exclude')
-        datas = get_meal_plan(timeFrame,targetCalories,diet, exclude)
-        print(timeFrame,targetCalories,diet,exclude)
+        timeFrame = request.form.getlist('timeFrame')
+        targetCalories = request.form.getlist('targetCalories')
+        diet = request.form.getlist('diet')
+        exclude = request.form.getlist('exclude')
+        print("ini request form ", timeFrame, targetCalories, diet, exclude)
 
         check = True
-        if timeFrame == '' or not timeFrame:
-            flash("Time frame couldn't be empty!", 'danger')
-            check = False
+        # if timeFrame == '' or not timeFrame:
+        #     flash("Time frame couldn't be empty!", 'danger')
+        #     check = False
 
-        if targetCalories == '' or not targetCalories:
-            flash("Target calories couldn't be empty", 'danger')
-            check = False
+        # if targetCalories == '' or not targetCalories:
+        #     flash("Target calories couldn't be empty", 'danger')
+        #     check = False
 
         if not check:
             return redirect(url_for('daily_meals'))
 
+        # datas = get_meal_plan(timeFrame,targetCalories,diet, exclude)
         return redirect(url_for('get_meal', timeFrame=timeFrame, targetCalories=targetCalories, diet=diet, exclude=exclude))
     
     return render_template('daily_meals.html')
 
 @app.route("/get_meal", methods=['POST', 'GET'])
-def get_meal(timeFrame, targetCalories, diet, exclude):
+def get_meal():
+    timeFrame = request.args.getlist('timeFrame')
+    targetCalories = request.args.getlist('targetCalories')
+    diet = request.args.getlist('diet')
+    exclude = request.args.getlist('exclude')
+
+    print("get_meals lengkapan nya",timeFrame,targetCalories,diet,exclude)
     datas = get_meal_plan(
         timeFrame=timeFrame, targetCalories=targetCalories, diet=diet, exclude=exclude)
+    print("INI DATAS DI GET_MEALS",datas)
     return render_template('get_meal_plan.html', datas=datas)
 
 @app.route('/summary')
@@ -86,3 +86,11 @@ def summary():
 
 if __name__ == '__main__':
     app.run(debug=True, port=8000)
+
+'''
+nano ..\..\..\webEnv\Scripts\activate.bat
+ctrl + x lalu y untuk save.
+deactivate
+lalu 
+..\..\..\webEnv\Scripts\activate
+'''
