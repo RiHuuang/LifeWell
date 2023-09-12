@@ -58,6 +58,9 @@ def meal_query(query):
 
 @app.route("/")
 def main_routes():
+    # referrer = request.headers.get('Referer')
+    # if referrer:
+    #     return redirect(url_for('loading'))
     return render_template('home.html')
 
 @app.route("/profile")
@@ -70,6 +73,9 @@ def profile():
 def calculate():
     return render_template('calculate.html')
 
+@app.route('/loading')
+def loading():
+    return render_template('loading.html')
 
 @app.route('/daily_meals', methods=['POST', 'GET'])
 def daily_meals():
@@ -117,9 +123,14 @@ def get_meal():
 def summary():
     return render_template('summary.html')
 
-
+@app.route('/temp')
+def temp():
+    page = url_for('main_routes')
+    return f'<a href="{page}">AAAA</a>'
 if __name__ == '__main__':
-    app.run(debug=True, port=8000)
+    app.run(debug=True, port=8800)
+
+
 
 '''
 nano ..\..\..\webEnv\Scripts\activate.bat

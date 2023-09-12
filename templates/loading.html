@@ -8,8 +8,6 @@
 
     <link rel="icon" href="{{ url_for('static', filename='css/Assets/LOGO.png') }}">
     <title>LifeWell</title>
-
-    
 </head>
 <body>
     
@@ -26,7 +24,16 @@
         </div>
 
     </div>
-<script src="{{ url_for('static', filename='js/loading.js') }}"></script>
+<!-- <script src="{{ url_for('static', filename='js/loading.js') }}"></script> -->
+<script>
+    function redirect() {
+            window.location.href = `{{url_for('main_routes')}}`;
+        }
 
+        var delay = 3100;
+
+        // Mengalihkan halaman setelah penundaan selesai
+        setTimeout(redirect, delay);
+</script>
 </body>
 </html>

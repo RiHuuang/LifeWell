@@ -1,5 +1,5 @@
 function redirect() {
-    window.location.href = "home.html";
+    window.location.href = `{{url_for('main_routes')}}`;
 }
 
 var delay = 3100;
