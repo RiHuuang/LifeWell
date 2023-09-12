@@ -130,7 +130,7 @@ def temp():
 
 @app.route('workout')
 def workout():
-    pass
+    return render_template('muscle.html')
 
 
 if __name__ == '__main__':
