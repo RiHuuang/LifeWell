@@ -127,6 +127,12 @@ def summary():
 def temp():
     page = url_for('main_routes')
     return f'<a href="{page}">AAAA</a>'
+
+@app.route('workout')
+def workout():
+    return render_template('muscle.html')
+
+
 if __name__ == '__main__':
     app.run(debug=True, port=8800)
 
