@@ -9,15 +9,49 @@ this_config = Config()
 
 app.secret_key= 'kelazz'
 
+def interpretBMI(bmi):
+    if(bmi < 18.5):
+        return "UNDERWEIGHT"
+    elif(bmi < 25):
+        return "HEALTHY"
+    elif(bmi < 30):
+        return "OVERWEIGHT"
+    else:
+        return "OBESE"
+
+    
+
+def calculate_bmi(height, weight):
+    
+    try:
+        height_cm = float(height)
+        weight_kg = float(weight)
+
+        if height_cm <= 0 or weight_kg <= 0:
+            return "Invalid input. Height and weight must be positive numbers."
+
+        bmi = weight_kg / ((height_cm / 100) ** 2)
+        return str(bmi)
+    except ValueError:
+        return "Invalid input. Height and weight must be numeric values."
+
 
 def calculate_bmr(gender,weight, height, age):
-    if gender == "male":
-        bmr = 88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age)
-    elif gender == "female":
-        bmr = 447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age)
-    else:
-        raise ValueError("Gender must be 'male' or 'female'")
-    return bmr
+    try:
+        weight = float(weight)
+        height = float(height)
+        age = float(age)
+
+        if gender == "male":
+            bmr = 88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age)
+        elif gender == "female":
+            bmr = 447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age)
+        else:
+            raise ValueError("Gender must be 'male' or 'female'")
+
+        return bmr
+    except ValueError:
+        raise ValueError("Weight, height, and age must be numeric values")
 
 
 def calculate_daily_calories(bmr, activity_level):
@@ -25,6 +59,7 @@ def calculate_daily_calories(bmr, activity_level):
         "sedentary": 1.2,
         "lightly_active": 1.375,
         "moderately_active": 1.55,
+        "active" : 1.65 ,
         "very_active": 1.725,
         "super_active": 1.9
     }
@@ -63,23 +98,68 @@ def main_routes():
     #     return redirect(url_for('loading'))
     return render_template('home.html')
 
+@app.route('/loading')
+def loading():
+    return render_template('loading.html')
+
 @app.route("/profile")
 def profile():
     # return render_template('profile.html')
     pass
 
 
-@app.route('/calculate')
+@app.route('/calculate', methods=['POST','GET'])
 def calculate():
-    return render_template('calculate.html')
+    print("Requests method",request.method)
 
-@app.route('/loading')
-def loading():
-    return render_template('loading.html')
+    # if request.method == 'POST':
+    #     height = float(request.form['input_tinggi'])
+    #     weight = float(request.form['input_berat'])
+    #     activity_level = request.form['activity']
+    #     gender = "male"
+    #     age = int(19)
+
+    #     print(height,weight,activity_level)
+
+    #     bmi = calculate_bmi(height, weight)
+    #     bmi_category = interpretBMI(bmi)
+
+    #     bmr = calculate_bmr(gender, weight, height, age)
+
+    #     daily_calories = calculate_daily_calories(bmr, activity_level)
+
+    #     return redirect(url_for('daily_meals', bmi=bmi, bmi_category=bmi_category, daily_calories=daily_calories))
+
+    # return render_template('calculate.html', bmi=None, bmi_category=None, daily_calories=None)
+    if request.method == 'POST':
+        print('jalan')
+        gender = "male"
+        age = 19
+        height = request.form.get('input_tinggi')
+        weight = request.form.get('input_berat')
+        activity = request.form.get('activity')
+
+        print("ini request form ", height, weight, activity)
+
+        bmi = float("{:.2f}".format(float(calculate_bmi(height, weight))))
+        desc = interpretBMI(bmi)
+
+        bmr = calculate_bmr(gender, weight, height, age)
+        
+        print("bmi desc bmr",bmi,desc,bmr)
+        check = True
+        if height == '' or not height:
+            check = False
+
+        if check == False :
+            redirect(url_for('calculate'))
+
+        return render_template('calculate.html', bmi=bmi, desc=desc)
+
+    return render_template('calculate.html', bmi = 0, desc = 'N/A')
 
 @app.route('/daily_meals', methods=['POST', 'GET'])
 def daily_meals():
-
     if request.method == 'POST':
         print('jalan')
         timeFrame = request.form.getlist('timeFrame')
@@ -123,10 +203,11 @@ def get_meal():
 def summary():
     return render_template('summary.html')
 
-@app.route('/temp')
-def temp():
-    page = url_for('main_routes')
-    return f'<a href="{page}">AAAA</a>'
+# @app.route('/temp')
+# def temp():
+#     page = url_for('main_routes')
+#     return f'<a href="{page}">AAAA</a>'
+
 if __name__ == '__main__':
     app.run(debug=True, port=8800)
 
