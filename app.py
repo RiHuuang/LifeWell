@@ -237,7 +237,7 @@ if response.status_code == 200:
     all_data = response.json()
     data = [exercise for exercise in all_data if exercise.get("equipment") == "body weight"][:8]
 else:
-    data = []  # Data kosong jika terjadi kesalahannm
+    data = []  # Data kosong jika terjadi kesalahan
 
 @app.route('/womoves')
 def womoves():
