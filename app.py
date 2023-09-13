@@ -70,6 +70,16 @@ def calculate_daily_calories(bmr, activity_level):
     else:
         raise ValueError("Invalid activity level")
 
+def get_meal_image(query):
+    params = {
+        'apiKey': this_config.API_KEY,
+        'query': query,
+    }
+    # print("API KEY IS -> ",this_config.API_KEY)
+    BASE_URL = this_config.URL_GENERATE_MEAL_PLAN
+    response = requests.get(BASE_URL, params=params).json()
+
+    return response
 
 
 def get_meal_plan(timeFrame, targetCalories, diet, exclude):
@@ -162,21 +172,30 @@ def daily_meals():
         "weightGain": "{:.2f}".format(calories * 1.3),
         "fastWeightGain": "{:.2f}".format(calories * 1.5)
     }
+
+
     options = [
-        {"value": "maintain", "text": "Maintain Weight"},
-        {"value": "mildWeightLoss", "text": "Mild Weight Loss"},
-        {"value": "weightLoss", "text": "Weight Loss"},
-        {"value": "extremeLoss", "text": "Extreme Weight Loss"},
-        {"value": "mildWeightGain", "text": "Mild Weight Gain"},
-        {"value": "weightGain", "text": "Weight Gain"},
-        {"value": "fastWeightGain", "text": "Fast Weight Gain"}
+        {"value": formatted_calories["maintain"], "text": "Maintain Weight",
+            "formatted_calories": formatted_calories["maintain"]},
+        {"value": formatted_calories["mildWeightLoss"], "text": "Mild Weight Loss",
+            "formatted_calories": formatted_calories["mildWeightLoss"]},
+        {"value": formatted_calories["weightLoss"], "text": "Weight Loss",
+            "formatted_calories": formatted_calories["weightLoss"]},
+        {"value": formatted_calories["extremeLoss"], "text": "Extreme Weight Loss",
+            "formatted_calories": formatted_calories["extremeLoss"]},
+        {"value": formatted_calories["mildWeightGain"], "text": "Mild Weight Gain",
+            "formatted_calories": formatted_calories["mildWeightGain"]},
+        {"value": formatted_calories["weightGain"], "text": "Weight Gain",
+            "formatted_calories": formatted_calories["weightGain"]},
+        {"value": formatted_calories["fastWeightGain"], "text": "Fast Weight Gain",
+            "formatted_calories": formatted_calories["fastWeightGain"]}
     ]
 
 
     if request.method == 'POST':
         print('jalan')
         timeFrame = request.form.getlist('timeFrame')
-        targetCalories = request.form.getlist('targetCalories')
+        targetCalories = request.form.getlist('goals')
         diet = request.form.getlist('diet')
         exclude = request.form.getlist('exclude')
 
@@ -184,7 +203,7 @@ def daily_meals():
         print("ini Activity", activity)
         print(calories)
         print("data di daily meals ---->>>",
-              timeFrame, targetCalories, diet, exclude)
+              timeFrame, targetCalories, diet, exclude) 
 
         check = True
         if timeFrame == '' or not timeFrame:
@@ -215,8 +234,9 @@ def get_meal():
     datas = get_meal_plan(
         timeFrame=timeFrame, targetCalories=targetCalories, diet=diet, exclude=exclude)
     # print(datas)
+    
 
-    return render_template('get_meal_plan.html', datas=datas)
+    return render_template('meals.html', datas=datas)
 
 @app.route('/summary')
 def summary():
@@ -239,11 +259,25 @@ if response.status_code == 200:
 else:
     data = []  # Data kosong jika terjadi kesalahannnn
 
+# punya ipenk
+api_url = "https://exercisedb.p.rapidapi.com/exercises/bodyPart/back"  # Ganti dengan URL API yang sesuai
+
+headers = {
+	"X-RapidAPI-Key": "685949c1d7mshf77a8318efe0eb6p1fc458jsn4229e07c81e8",
+	"X-RapidAPI-Host": "exercisedb.p.rapidapi.com"
+}
+response = requests.get(api_url,headers=headers)
+
+if response.status_code == 200:
+    all_data = response.json()
+    data = [exercise for exercise in all_data if exercise.get("equipment") == "body weight"][:8]
+else:
+    data = []  # Data kosong jika terjadi kesalahan
+
 @app.route('/womoves')
 def womoves():
     return render_template('womoves.html', data=data)
 
-# prubahan yang belom terjadi
 
 
 if __name__ == '__main__':
