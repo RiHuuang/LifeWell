@@ -7,38 +7,37 @@ body {
 }
 
 p{
-    font-size: 80%;
-}
-
-.image-grid {
-    /* display: flex; */
-    /* grid-template-columns: repeat(4, 1fr); 4 columns in the grid */
-    /* grid-gap: 20px; Gap between images */
-    max-width: 80%; /* Adjust as needed */
-    margin: 20px auto; /* Center the grid */
+    font-size: 110%;
+    padding: 0px;
+    font-weight: bold
 }
 
 .grid-container {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    padding: 10px;
-  }
+    padding: 1vw;
+    /* margin: 10px; */
+}
   
 .grid-item {
-size: 50%;
-background-color: rgba(255, 255, 255, 0.8);
-border: 1px solid rgba(0, 0, 0, 0.8);
-padding: 20px;
-font-size: 30px;
-text-align: center;
+    background-color: rgba(255, 255, 255, 0.9);
+    /* background-color: white; */
+    border-radius: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+    /* font-size: 30px; */
+    text-align: left;
+    margin: 1vh;
 }
 
 
-.image {
-    text-align: center;
+.gambar {
+    width: 100%;
+    border-radius: 10%;
 }
 
-.image img {
+/* .image img {
     max-width: 100%;
     height: auto;
-}
+} */
