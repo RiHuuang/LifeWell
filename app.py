@@ -132,6 +132,10 @@ def temp():
 def workout():
     return render_template('muscle.html')
 
+@app.route('/womoves')
+def womoves():
+    return render_template('womoves.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=8800)

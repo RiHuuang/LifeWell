@@ -1,0 +1,22 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columns in the grid */
+    grid-gap: 20px; /* Gap between images */
+    max-width: 800px; /* Adjust as needed */
+    margin: 20px auto; /* Center the grid */
+}
+
+.image {
+    text-align: center;
+}
+
+.image img {
+    max-width: 100%;
+    height: auto;
+}
