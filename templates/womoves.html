@@ -11,11 +11,12 @@
 </head>
 <body>
     {% for name in data %}
+    
     <div class="image-grid">
-        <img src="{{ name['gifUrl'] }}" alt ="aa">
-        <p>{{ name['nama'] }}</p>
-        <p>{{ name['equipment'] }}</p>
-        <p>{{ name['target'] }}</p>    
+        <img src="{{ name['gifUrl'] }}" alt ="aa">    
+        <p>Name : {{ name['name'] }}</p>
+        <p>Equipment : {{ name['equipment'] }}</p>
+        <p>Target : {{ name['target'] }}</p>    
     </div>
     
     {% endfor %}
