@@ -103,10 +103,22 @@ def meal_query(query):
 
 @app.route("/")
 def main_routes():
-    # referrer = request.headers.get('Referer')
-    # if referrer:
-    #     return redirect(url_for('loading'))
+    if request.method == 'POST':
+        nama = request.form.get("name")
+        age = request.form.get("age")
+        gender = request.form.get("gender")
+        password = request.form.get("password")
+        
+
+        redirect(url_for('home', age=age, gender=gender))
+
+
+    return render_template('login.html')
+
+@app.route("/home")
+def main_routes():
     return render_template('home.html')
+
 
 @app.route('/loading')
 def loading():
