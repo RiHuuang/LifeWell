@@ -10,31 +10,14 @@
     <link rel="stylesheet" href="{{url_for('static', filename='css/womoves.css')}}">
 </head>
 <body>
+    {% for name in data %}
     <div class="image-grid">
-        <div class="image">
-            <img src="image1.jpg" alt="Image 1">
-        </div>
-        <div class="image">
-            <img src="image2.jpg" alt="Image 2">
-        </div>
-        <div class="image">
-            <img src="image3.jpg" alt="Image 3">
-        </div>
-        <div class="image">
-            <img src="image4.jpg" alt="Image 4">
-        </div>
-        <div class="image">
-            <img src="image5.jpg" alt="Image 5">
-        </div>
-        <div class="image">
-            <img src="image6.jpg" alt="Image 6">
-        </div>
-        <div class="image">
-            <img src="image7.jpg" alt="Image 7">
-        </div>
-        <div class="image">
-            <img src="image8.jpg" alt="Image 8">
-        </div>
+        <img src="{{ name['gifUrl'] }}" alt ="aa">
+        <p>{{ name['nama'] }}</p>
+        <p>{{ name['equipment'] }}</p>
+        <p>{{ name['target'] }}</p>    
     </div>
+    
+    {% endfor %}
 </body>
 </html>
