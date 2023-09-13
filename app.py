@@ -233,7 +233,6 @@ headers = {
 	"X-RapidAPI-Host": "exercisedb.p.rapidapi.com"
 }
 response = requests.get(api_url,headers=headers)
-
 if response.status_code == 200:
     all_data = response.json()
     data = [exercise for exercise in all_data if exercise.get("equipment") == "body weight"][:8]
