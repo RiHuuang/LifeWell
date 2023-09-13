@@ -262,13 +262,67 @@ def get_meal():
 def summary():
     return render_template('summary.html')
 
+
+
+
+
+
+
+
 @app.route('/workout')
 def workout():
     return render_template('muscle.html')
 
+
+
+
+
+
+
+
 @app.route('/womoves')
 def womoves():
-    return render_template('womoves.html')
+    
+    muscleList = request.args.getlist('muscleList')
+    intensitylevel = request.args.getlist('intensitylevel')
+
+    if muscleList == "cardio":
+        api_url = "https://exercisedb.p.rapidapi.com/exercises/bodyPart/cardio"
+    else:
+        api_url = "https://exercisedb.p.rapidapi.com/exercises/bodyPart/neck"  # Ganti dengan URL API yang sesuai
+
+    headers = {
+        "X-RapidAPI-Key": "685949c1d7mshf77a8318efe0eb6p1fc458jsn4229e07c81e8",
+        "X-RapidAPI-Host": "exercisedb.p.rapidapi.com"
+    }
+    response = requests.get(api_url,headers=headers)
+    
+    
+    
+    if response.status_code == 200:
+        all_data = response.json()
+        data = [exercise for exercise in all_data if exercise.get("equipment") == "body weight"][:8]
+    else:
+        data = []  # Data kosong jika terjadi kesalahannnn
+
+    # # punya ipenk
+    # api_url = "https://exercisedb.p.rapidapi.com/exercises/bodyPart/back"  # Ganti dengan URL API yang sesuai
+
+    # headers = {
+    #     "X-RapidAPI-Key": "685949c1d7mshf77a8318efe0eb6p1fc458jsn4229e07c81e8",
+    #     "X-RapidAPI-Host": "exercisedb.p.rapidapi.com"
+    # }
+    # response = requests.get(api_url,headers=headers)
+
+    # if response.status_code == 200:
+    #     all_data = response.json()
+    #     data = [exercise for exercise in all_data if exercise.get("equipment") == "body weight"][:8]
+    # else:
+    #     data = []  # Data kosong jika terjadi kesalahan
+        
+        
+    return render_template('womoves.html', data=data)
+
 
 
 if __name__ == '__main__':
