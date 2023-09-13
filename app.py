@@ -243,6 +243,7 @@ else:
 def womoves():
     return render_template('womoves.html', data=data)
 
+# prubahan yang belom terjadi
 
 
 if __name__ == '__main__':
