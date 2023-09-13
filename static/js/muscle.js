@@ -4,7 +4,7 @@ const bodyparts = document.getElementById('muscleList');
 // const heightInput = document.getElementById('height');
 
 
-element.addEventListener("click", function(){
+.addEventListener("click", function(){
     console.log("Hello World");
     console.log(bodyparts.value);
     console.log("Goodbye World");
