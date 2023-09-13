@@ -31,10 +31,10 @@
     <form class="container" method="post">
         <div class="radio-container">
             <span id="timeFrame">TIME FRAME</span>
-            <input type="radio" name="timeFrame" id="day" value=""/>
+            <input type="radio" name="timeFrame" id="day" value="day"/>
             <label for="day">Day</label>
     
-            <input type="radio" name="timeFrame" id="week" value=""/>
+            <input type="radio" name="timeFrame" id="week" value="week"/>
             <label for="week">Week</label>
         </div>
         
@@ -42,8 +42,8 @@
             <label for="goals" id = 'hoye'>GOALS</label>
             <select id="goalsList" name="goals" required>
                 <option value="">Select Activity</option>
-                {% for option in formatted_calories %}
-                <option value="{{ option.value }}">{{ option.text }}</option>
+                {% for option in options %}
+                <option value="{{ option.value }}">{{ option.text }} - {{ option.formatted_calories }}</option>
                 {% endfor %}
             </select>
         </div>

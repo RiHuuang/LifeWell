@@ -14,14 +14,17 @@
         </header>
 
         <section class="columns">
+            {% for meal in datas['meals'] %}
             <div class="column">
-                <h2>LOADED VEGGIE OMELET</h2>
+                <h2>{{meal['title']}}</h2>
                 <br>
                 <img src="download (4).jpeg" alt="deskripsi gambar" width="220" height="220">
-                <p>Ready in Minute : 45</p>
-                <p>Servings : 2</p>
+                <p>Ready in Minute : {{ meal['readyInMinutes'] }}</p>
+                <p>Servings : {{ meal['servings'] }}</p>
+                <p>Source URL: <a href="{{ meal['sourceUrl'] }}">{{ meal['sourceUrl'] }}</a></p>
             </div>
-            <div class="column">
+            {% endfor %}
+            <!-- <div class="column">
                 <h2>GNOCCI WITH VEGETABLES</h2>
                 <br>
                 <img src="download (4).jpeg" alt="deskripsi gambar" width="220" height="220">
@@ -34,7 +37,7 @@
                 <img src="download (4).jpeg" alt="deskripsi gambar" width="220" height="220">
                 <p>Ready in Minute : 45</p>
                 <p>Servings : 10</p>
-            </div>
+            </div> -->
 
         </section>
         <div class="button">
