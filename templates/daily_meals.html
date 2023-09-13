@@ -28,7 +28,7 @@
     <h1>Generate Meal Plan</h1>
     <h2 id="hadua"><i>with three meals (breakfast, lunch, and dinner)</i></h2>
 
-    <form class="container">
+    <form class="container" method="post">
         <div class="radio-container">
             <span id="timeFrame">TIME FRAME</span>
             <input type="radio" name="timeFrame" id="day" value=""/>
@@ -41,14 +41,10 @@
         <div class="targetGoals">
             <label for="goals" id = 'hoye'>GOALS</label>
             <select id="goalsList" name="goals" required>
-                <option value = ""> Select Activity</option>
-                <option value = "maintain" name = "maintain"> Maintain Weight</option>
-                <option value = "mildWeightLoss" name = "mildWeightLoss"> Mild Weight Loss</option>
-                <option value = "weightLoss" name = "weightLoss"> Weight Loss</option>
-                <option value = "extremeLoss" name = "extremeLoss"> Extreme Weight Loss</option>
-                <option value = "mildWeightGain" name = "mildWeightGain"> Mild Weight Gain</option>
-                <option value = "weightGain" name = "weightGain"> Weight Gain</option>
-                <option value = "fastWeightGain" name = "fastWeightGain"> Fast Weight Gain</option>
+                <option value="">Select Activity</option>
+                {% for option in formatted_calories %}
+                <option value="{{ option.value }}">{{ option.text }}</option>
+                {% endfor %}
             </select>
         </div>
     

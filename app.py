@@ -1,5 +1,5 @@
 import requests
-from flask import Flask, request, jsonify, render_template, redirect, url_for, flash
+from flask import Flask, request, jsonify, render_template, redirect, url_for, flash, session
 from config import Config
 import re
 
@@ -112,25 +112,6 @@ def profile():
 def calculate():
     print("Requests method",request.method)
 
-    # if request.method == 'POST':
-    #     height = float(request.form['input_tinggi'])
-    #     weight = float(request.form['input_berat'])
-    #     activity_level = request.form['activity']
-    #     gender = "male"
-    #     age = int(19)
-
-    #     print(height,weight,activity_level)
-
-    #     bmi = calculate_bmi(height, weight)
-    #     bmi_category = interpretBMI(bmi)
-
-    #     bmr = calculate_bmr(gender, weight, height, age)
-
-    #     daily_calories = calculate_daily_calories(bmr, activity_level)
-
-    #     return redirect(url_for('daily_meals', bmi=bmi, bmi_category=bmi_category, daily_calories=daily_calories))
-
-    # return render_template('calculate.html', bmi=None, bmi_category=None, daily_calories=None)
     if request.method == 'POST':
         print('jalan')
         gender = "male"
@@ -145,6 +126,8 @@ def calculate():
         desc = interpretBMI(bmi)
 
         bmr = calculate_bmr(gender, weight, height, age)
+        session['bmr'] = bmr
+        session['activity'] = activity
         
         print("bmi desc bmr",bmi,desc,bmr)
         check = True
@@ -154,19 +137,54 @@ def calculate():
         if check == False :
             redirect(url_for('calculate'))
 
-        return render_template('calculate.html', bmi=bmi, desc=desc)
+        return render_template('calculate.html', bmi=bmi, desc=desc, activity=activity)
 
     return render_template('calculate.html', bmi = 0, desc = 'N/A')
 
+
 @app.route('/daily_meals', methods=['POST', 'GET'])
 def daily_meals():
+    bmr = session.get('bmr', None)
+    activity = session.get('activity', None)
+
+    if bmr is None or activity is None:
+        flash("BMR or Activity not found in session", 'danger')
+        return redirect(url_for('calculate'))
+    
+    calories = float("{:.2f}".format(float(calculate_daily_calories(bmr, activity))))
+
+    formatted_calories = {
+        "maintain": "{:.2f}".format(calories),
+        "mildWeightLoss": "{:.2f}".format(calories * 0.9),
+        "weightLoss": "{:.2f}".format(calories * 0.85),
+        "extremeLoss": "{:.2f}".format(calories * 0.75),
+        "mildWeightGain": "{:.2f}".format(calories * 1.1),
+        "weightGain": "{:.2f}".format(calories * 1.3),
+        "fastWeightGain": "{:.2f}".format(calories * 1.5)
+    }
+    options = [
+        {"value": "maintain", "text": "Maintain Weight"},
+        {"value": "mildWeightLoss", "text": "Mild Weight Loss"},
+        {"value": "weightLoss", "text": "Weight Loss"},
+        {"value": "extremeLoss", "text": "Extreme Weight Loss"},
+        {"value": "mildWeightGain", "text": "Mild Weight Gain"},
+        {"value": "weightGain", "text": "Weight Gain"},
+        {"value": "fastWeightGain", "text": "Fast Weight Gain"}
+    ]
+
+
     if request.method == 'POST':
         print('jalan')
         timeFrame = request.form.getlist('timeFrame')
         targetCalories = request.form.getlist('targetCalories')
         diet = request.form.getlist('diet')
         exclude = request.form.getlist('exclude')
-        print("ini request form ", timeFrame, targetCalories, diet, exclude)
+
+        print("ini BMR ", bmr)
+        print("ini Activity", activity)
+        print(calories)
+        print("data di daily meals ---->>>",
+              timeFrame, targetCalories, diet, exclude)
 
         check = True
         if timeFrame == '' or not timeFrame:
@@ -180,10 +198,11 @@ def daily_meals():
         if not check:
             return redirect(url_for('daily_meals'))
 
-        # datas = get_meal_plan(timeFrame,targetCalories,diet, exclude)
+        # datas = get_meal_plan(timeFrame, targetCalories, diet, exclude)
         return redirect(url_for('get_meal', timeFrame=timeFrame, targetCalories=targetCalories, diet=diet, exclude=exclude))
-    
-    return render_template('daily_meals.html')
+
+    return render_template('daily_meals.html', formatted_calories=formatted_calories, options=options)
+
 
 @app.route("/get_meal", methods=['POST', 'GET'])
 def get_meal():
