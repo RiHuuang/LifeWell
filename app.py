@@ -222,9 +222,6 @@ def get_meal():
 def summary():
     return render_template('summary.html')
 
-
-
-
 @app.route('/workout')
 def workout():
     return render_template('muscle.html')
