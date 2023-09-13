@@ -239,9 +239,7 @@ if response.status_code == 200:
 else:
     data = []  # Data kosong jika terjadi kesalahannnn
 
-@app.route('/womoves')
-def womoves():
-    return render_template('womoves.html', data=data)
+
 
 
 
