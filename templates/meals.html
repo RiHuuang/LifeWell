@@ -14,11 +14,11 @@
         </header>
 
         <section class="columns">
-            {% for meal in datas['meals'] %}
+            {% for meal in datas['meals'] %}    
             <div class="column">
                 <h2>{{meal['title']}}</h2>
                 <br>
-                <img src="download (4).jpeg" alt="deskripsi gambar" width="220" height="220">
+                <img src="{{image_datas[meal['title']]}}" alt="deskripsi gambar" width="220" height="220">
                 <p>Ready in Minute : {{ meal['readyInMinutes'] }}</p>
                 <p>Servings : {{ meal['servings'] }}</p>
                 <p>Source URL: <a href="{{ meal['sourceUrl'] }}">{{ meal['sourceUrl'] }}</a></p>

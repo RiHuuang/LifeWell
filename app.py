@@ -76,10 +76,10 @@ def get_meal_image(query):
         'query': query,
     }
     # print("API KEY IS -> ",this_config.API_KEY)
-    BASE_URL = this_config.URL_GENERATE_MEAL_PLAN
+    BASE_URL = this_config.URL_SEARCH_RECIPE
     response = requests.get(BASE_URL, params=params).json()
-
-    return response
+    print("INI RESPONSE DARI GET_MEAL_IMAGE",response,"\n\n")
+    return response['results'][0]['image']
 
 
 def get_meal_plan(timeFrame, targetCalories, diet, exclude):
@@ -123,14 +123,14 @@ def calculate():
     print("Requests method",request.method)
 
     if request.method == 'POST':
-        print('jalan')
+        # print('jalan')
         gender = "male"
         age = 19
         height = request.form.get('input_tinggi')
         weight = request.form.get('input_berat')
         activity = request.form.get('activity')
 
-        print("ini request form ", height, weight, activity)
+        # print("ini request form ", height, weight, activity)
 
         bmi = float("{:.2f}".format(float(calculate_bmi(height, weight))))
         desc = interpretBMI(bmi)
@@ -139,7 +139,7 @@ def calculate():
         session['bmr'] = bmr
         session['activity'] = activity
         
-        print("bmi desc bmr",bmi,desc,bmr)
+        # print("bmi desc bmr",bmi,desc,bmr)
         check = True
         if height == '' or not height:
             check = False
@@ -199,11 +199,11 @@ def daily_meals():
         diet = request.form.getlist('diet')
         exclude = request.form.getlist('exclude')
 
-        print("ini BMR ", bmr)
-        print("ini Activity", activity)
-        print(calories)
-        print("data di daily meals ---->>>",
-              timeFrame, targetCalories, diet, exclude) 
+        # print("ini BMR ", bmr)
+        # print("ini Activity", activity)
+        # print(calories)
+        # print("data di daily meals ---->>>",
+        #       timeFrame, targetCalories, diet, exclude) 
 
         check = True
         if timeFrame == '' or not timeFrame:
@@ -233,10 +233,18 @@ def get_meal():
 
     datas = get_meal_plan(
         timeFrame=timeFrame, targetCalories=targetCalories, diet=diet, exclude=exclude)
-    # print(datas)
+    # print("->>>>> datas ",datas)
     
+    image_datas = dict({})
+    for meal in datas['meals']:
+        title = meal['title']
+        print("ini title", title)
+        image_datas[meal['title']] = get_meal_image(title)
+    
+    print("INI URL NYA NIH ANJENG", image_datas[meal['title']])
 
-    return render_template('meals.html', datas=datas)
+    return render_template('meals.html', datas=datas, image_datas=image_datas)
+
 
 @app.route('/summary')
 def summary():
