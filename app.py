@@ -14,7 +14,7 @@ def interpretBMI(bmi):
         return "UNDERWEIGHT"
     elif(bmi < 25):
         return "HEALTHY"
-    elif(bmi < 30):
+    elif(bmi < 30): 
         return "OVERWEIGHT"
     else:
         return "OBESE"
