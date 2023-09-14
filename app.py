@@ -14,7 +14,7 @@ def interpretBMI(bmi):
         return "UNDERWEIGHT"
     elif(bmi < 25):
         return "HEALTHY"
-    elif(bmi < 30):
+    elif(bmi < 30): 
         return "OVERWEIGHT"
     else:
         return "OBESE"
@@ -269,8 +269,16 @@ def summary():
 
 
 
-@app.route('/workout')
+@app.route('/workout', methods=['GET','POST'])
 def workout():
+    print("Requests method",request.method)
+    if request.method == 'POST':
+        muscle = request.form.get('muscleList')
+        intensity = request.form.get('intensityLevel')
+        print(muscle,intensity)
+        
+        return redirect(url_for('womoves'))
+        
     return render_template('muscle.html')
 
 
@@ -280,16 +288,17 @@ def workout():
 
 
 
-@app.route('/womoves')
+@app.route('/womoves', methods=['GET', 'POST'])
 def womoves():
     
-    muscleList = request.args.getlist('muscleList')
-    intensitylevel = request.args.getlist('intensitylevel')
+    print("ini udah masuk ke dalam rute womoves, muscle nya =", muscle)
+    muscle= request.args.getlist('muscleList')
+    intensity = request.args.getlist('intensitylevel')
 
-    if muscleList == "cardio":
+    if muscle == "cardio":
         api_url = "https://exercisedb.p.rapidapi.com/exercises/bodyPart/cardio"
     else:
-        api_url = "https://exercisedb.p.rapidapi.com/exercises/bodyPart/neck"  # Ganti dengan URL API yang sesuai
+        print('tes')# Ganti dengan URL API yang sesuai
 
     headers = {
         "X-RapidAPI-Key": "685949c1d7mshf77a8318efe0eb6p1fc458jsn4229e07c81e8",
@@ -319,9 +328,25 @@ def womoves():
     #     data = [exercise for exercise in all_data if exercise.get("equipment") == "body weight"][:8]
     # else:
     #     data = []  # Data kosong jika terjadi kesalahan
-        
-        
-    return render_template('womoves.html', data=data)
+    @app.route('/womoves', methods=['GET', 'POST'])
+    def womoves():
+    
+        print("ini udah masuk ke dalam rute womoves, muscle nya =", muscle)
+        muscle= request.args.getlist('muscleList')
+        intensity = request.args.getlist('intensitylevel')
+
+        if muscle == "cardio":
+            api_url = "https://exercisedb.p.rapidapi.com/exercises/bodyPart/cardio"
+        else:
+            api_url = "https://exercisedb.p.rapidapi.com/exercises/bodyPart/neck"  # Ganti dengan URL API yang sesuai
+
+        headers = {
+            "X-RapidAPI-Key": "685949c1d7mshf77a8318efe0eb6p1fc458jsn4229e07c81e8",
+            "X-RapidAPI-Host": "exercisedb.p.rapidapi.com"
+        }
+        response = requests.get(api_url,headers=headers)    
+            
+        return render_template('womoves.html', data=data)
 
 
 
