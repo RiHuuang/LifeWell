@@ -270,15 +270,15 @@ def summary():
 
 
 
-@app.route('/workout', methods=['GET','POST'])
-def workout():
+@app.route('/muscle', methods=['GET','POST'])
+def muscle():
     print("Requests method",request.method)
     if request.method == 'POST':
         muscle = request.form.get('muscleList')
-        intensity = request.form.get('intensityLevel')
+        intensity = request.form.get('intensitylevel')
         print(muscle,intensity)
         
-        return redirect(url_for('womoves'))
+        return redirect(url_for('womoves', muscle=muscle, intensity=intensity))
         
     return render_template('muscle.html')
 
@@ -291,15 +291,33 @@ def workout():
 
 @app.route('/womoves', methods=['GET', 'POST'])
 def womoves():
-    
-    print("ini udah masuk ke dalam rute womoves, muscle nya =", muscle)
-    muscle= request.args.getlist('muscleList')
-    intensity = request.args.getlist('intensitylevel')
+    print("Requests method",request.method)
+    if request.method == 'GET':
+        print("Ini udah masuk kedalam rute womoves")
+        muscle = request.args.get('muscle')
+        intensity = request.args.get('intensity')
+        print(muscle,intensity)
 
     if muscle == "cardio":
         api_url = "https://exercisedb.p.rapidapi.com/exercises/bodyPart/cardio"
-    else:
-        print('tes')# Ganti dengan URL API yang sesuai
+    if muscle == "neck":
+        api_url = "https://exercisedb.p.rapidapi.com/exercises/bodyPart/neck"
+    if muscle == "shoulders":
+        api_url = "https://exercisedb.p.rapidapi.com/exercises/bodyPart/shoulders"
+    if muscle == "chest":
+        api_url = "https://exercisedb.p.rapidapi.com/exercises/bodyPart/chest"
+    if muscle == "back":
+        api_url = "https://exercisedb.p.rapidapi.com/exercises/bodyPart/back"
+    if muscle == "waist":
+        api_url = "https://exercisedb.p.rapidapi.com/exercises/bodyPart/waist"
+    if muscle == "lower_arms":
+        api_url = "https://exercisedb.p.rapidapi.com/exercises/bodyPart/lower%20arms"
+    if muscle == "lower_legs":
+        api_url = "https://exercisedb.p.rapidapi.com/exercises/bodyPart/lower%20legs"
+    if muscle == "upper_arms":
+        api_url = "https://exercisedb.p.rapidapi.com/exercises/bodyPart/upper%20arms"
+    if muscle == "upper_legs":
+        api_url = "https://exercisedb.p.rapidapi.com/exercises/bodyPart/upper%20legs"
 
     headers = {
         "X-RapidAPI-Key": "685949c1d7mshf77a8318efe0eb6p1fc458jsn4229e07c81e8",
@@ -307,47 +325,13 @@ def womoves():
     }
     response = requests.get(api_url,headers=headers)
     
-    
-    
     if response.status_code == 200:
         all_data = response.json()
         data = [exercise for exercise in all_data if exercise.get("equipment") == "body weight"][:8]
     else:
         data = []  # Data kosong jika terjadi kesalahannnn
 
-    # # punya ipenk
-    # api_url = "https://exercisedb.p.rapidapi.com/exercises/bodyPart/back"  # Ganti dengan URL API yang sesuai
-
-    # headers = {
-    #     "X-RapidAPI-Key": "685949c1d7mshf77a8318efe0eb6p1fc458jsn4229e07c81e8",
-    #     "X-RapidAPI-Host": "exercisedb.p.rapidapi.com"
-    # }
-    # response = requests.get(api_url,headers=headers)
-
-    # if response.status_code == 200:
-    #     all_data = response.json()
-    #     data = [exercise for exercise in all_data if exercise.get("equipment") == "body weight"][:8]
-    # else:
-    #     data = []  # Data kosong jika terjadi kesalahan
-    @app.route('/womoves', methods=['GET', 'POST'])
-    def womoves():
-    
-        print("ini udah masuk ke dalam rute womoves, muscle nya =", muscle)
-        muscle= request.args.getlist('muscleList')
-        intensity = request.args.getlist('intensitylevel')
-
-        if muscle == "cardio":
-            api_url = "https://exercisedb.p.rapidapi.com/exercises/bodyPart/cardio"
-        else:
-            api_url = "https://exercisedb.p.rapidapi.com/exercises/bodyPart/neck"  # Ganti dengan URL API yang sesuai
-
-        headers = {
-            "X-RapidAPI-Key": "685949c1d7mshf77a8318efe0eb6p1fc458jsn4229e07c81e8",
-            "X-RapidAPI-Host": "exercisedb.p.rapidapi.com"
-        }
-        response = requests.get(api_url,headers=headers)    
-            
-        return render_template('womoves.html', data=data)
+    return render_template('womoves.html',data=data)
 
 
 
