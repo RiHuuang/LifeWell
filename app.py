@@ -320,18 +320,28 @@ def womoves():
         api_url = "https://exercisedb.p.rapidapi.com/exercises/bodyPart/upper%20legs"
 
     headers = {
-        "X-RapidAPI-Key": "685949c1d7mshf77a8318efe0eb6p1fc458jsn4229e07c81e8",
-        "X-RapidAPI-Host": "exercisedb.p.rapidapi.com"
+        'X-RapidAPI-Key': 'b958d466damsh993cd90275c9ef0p1de1f2jsnb9744cfaf79c',
+        'X-RapidAPI-Host': 'exercisedb.p.rapidapi.com'
+
     }
     response = requests.get(api_url,headers=headers)
     
     if response.status_code == 200:
         all_data = response.json()
-        data = [exercise for exercise in all_data if exercise.get("equipment") == "body weight"][:8]
+        if intensity == "Heavy" and muscle == "cardio":
+            data = [exercise for exercise in all_data if exercise.get("equipment") != "body weight"]
+        elif intensity == 'Moderate' and muscle == 'shoulders':
+            data = [exercise for exercise in all_data if exercise.get("equipment") == "band"][:8]
+        elif intensity == 'Heavy' and muscle == 'shoulders':
+            data = [exercise for exercise in all_data if exercise.get("equipment") == "cable"][:8]
+        elif intensity == "Heavy":
+            data = [exercise for exercise in all_data if exercise.get("equipment") != "body weight"][:8]
+        else:
+            data = [exercise for exercise in all_data if exercise.get("equipment") == "body weight"][:8]
     else:
-        data = []  # Data kosong jika terjadi kesalahannnn
+        data = []  # Data kosong jika terjadi kesalahann
 
-    return render_template('womoves.html',data=data)
+    return render_template('womoves.html', data=data)
 
 
 
