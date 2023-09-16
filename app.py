@@ -76,10 +76,10 @@ def get_meal_image(query):
         'query': query,
     }
     # print("API KEY IS -> ",this_config.API_KEY)
-    BASE_URL = this_config.URL_GENERATE_MEAL_PLAN
+    BASE_URL = this_config.URL_SEARCH_RECIPE
     response = requests.get(BASE_URL, params=params).json()
-
-    return response
+    print("INI RESPONSE DARI GET_MEAL_IMAGE",response,"\n\n")
+    return response['results'][0]['image']
 
 
 def get_meal_plan(timeFrame, targetCalories, diet, exclude):
@@ -101,12 +101,25 @@ def meal_query(query):
     response = requests.get(
         BASE_URL + query, headers={'X-Api-Key': this_config.X_API_KEY})
 
-@app.route("/")
+@app.route("/", methods = ['POST', 'GET'])
 def main_routes():
-    # referrer = request.headers.get('Referer')
-    # if referrer:
-    #     return redirect(url_for('loading'))
+    if request.method == 'POST':
+        nama = request.form.get("name")
+        age = request.form.get("age")
+        gender = request.form.get("gender")
+        password = request.form.get("password")
+        
+        session['age'] = age
+        session['gender'] = gender
+
+        return redirect(url_for('home'))
+
+    return render_template('login.html')
+
+@app.route("/home")
+def home():
     return render_template('home.html')
+
 
 @app.route('/loading')
 def loading():
@@ -123,14 +136,14 @@ def calculate():
     print("Requests method",request.method)
 
     if request.method == 'POST':
-        print('jalan')
-        gender = "male"
-        age = 19
+        # print('jalan')
+        gender = session.get('gender', None)
+        age = session.get('age', None)
         height = request.form.get('input_tinggi')
         weight = request.form.get('input_berat')
         activity = request.form.get('activity')
 
-        print("ini request form ", height, weight, activity)
+        # print("ini request form ", height, weight, activity)
 
         bmi = float("{:.2f}".format(float(calculate_bmi(height, weight))))
         desc = interpretBMI(bmi)
@@ -139,7 +152,7 @@ def calculate():
         session['bmr'] = bmr
         session['activity'] = activity
         
-        print("bmi desc bmr",bmi,desc,bmr)
+        # print("bmi desc bmr",bmi,desc,bmr)
         check = True
         if height == '' or not height:
             check = False
@@ -199,11 +212,11 @@ def daily_meals():
         diet = request.form.getlist('diet')
         exclude = request.form.getlist('exclude')
 
-        print("ini BMR ", bmr)
-        print("ini Activity", activity)
-        print(calories)
-        print("data di daily meals ---->>>",
-              timeFrame, targetCalories, diet, exclude) 
+        # print("ini BMR ", bmr)
+        # print("ini Activity", activity)
+        # print(calories)
+        # print("data di daily meals ---->>>",
+        #       timeFrame, targetCalories, diet, exclude) 
 
         check = True
         if timeFrame == '' or not timeFrame:
@@ -233,10 +246,18 @@ def get_meal():
 
     datas = get_meal_plan(
         timeFrame=timeFrame, targetCalories=targetCalories, diet=diet, exclude=exclude)
-    # print(datas)
+    # print("->>>>> datas ",datas)
     
+    image_datas = dict({})
+    for meal in datas['meals']:
+        title = meal['title']
+        print("ini title", title)
+        image_datas[meal['title']] = get_meal_image(title)
+    
+    print("INI URL NYA NIH ANJENG", image_datas[meal['title']])
 
-    return render_template('meals.html', datas=datas)
+    return render_template('meals.html', datas=datas, image_datas=image_datas)
+
 
 @app.route('/summary')
 def summary():
