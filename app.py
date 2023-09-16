@@ -101,7 +101,7 @@ def meal_query(query):
     response = requests.get(
         BASE_URL + query, headers={'X-Api-Key': this_config.X_API_KEY})
 
-@app.route("/")
+@app.route("/", methods = ['POST', 'GET'])
 def main_routes():
     if request.method == 'POST':
         nama = request.form.get("name")
@@ -109,14 +109,15 @@ def main_routes():
         gender = request.form.get("gender")
         password = request.form.get("password")
         
+        session['age'] = age
+        session['gender'] = gender
 
-        redirect(url_for('home', age=age, gender=gender))
-
+        return redirect(url_for('home'))
 
     return render_template('login.html')
 
 @app.route("/home")
-def main_routes():
+def home():
     return render_template('home.html')
 
 
@@ -136,8 +137,8 @@ def calculate():
 
     if request.method == 'POST':
         # print('jalan')
-        gender = "male"
-        age = 19
+        gender = session.get('gender', None)
+        age = session.get('age', None)
         height = request.form.get('input_tinggi')
         weight = request.form.get('input_berat')
         activity = request.form.get('activity')
@@ -262,23 +263,9 @@ def get_meal():
 def summary():
     return render_template('summary.html')
 
-
-
-
-
-
-
-
 @app.route('/workout')
 def workout():
     return render_template('muscle.html')
-
-
-
-
-
-
-
 
 @app.route('/womoves')
 def womoves():

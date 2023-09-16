@@ -13,8 +13,7 @@
     <title>Register | LifeWell</title>
 </head>
 <body>
-
-  <div class="container">
+<div class="container" style="display: none;">
   <h1>Register</h1>
 
   <form method="POST">
@@ -36,9 +35,17 @@
     
     <button type="submit">Login</button>
   </form>
+</div>
 
-
-  </div>
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      if (document.referrer === '') {
+        window.location.href = `{{ url_for('loading') }}`
+      } else {
+        $('.container').css("display", "block")
+      }
+    })
+  </script>
 </body>
 </html>
