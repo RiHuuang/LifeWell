@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins" rel="stylesheet">
+    <title>NPL</title>
+    <link rel="icon" href="{{ url_for('static', filename='css/Assets/LOGO.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/askingStyle.css') }}">
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <h1>WHAT DO YOU EAT YESTERDAY ? </h1>
+        </header>
+
+        <form method='POST'>
+            <div class="container">
+                <input type="text" id="yohoo" placeholder="Ex. I eat nasi goreng and 100gr chicken steak yesterday" required name="foodquery" onclick="clearPlaceholder(this)">
+            </div>
+              
+            <div class="button">
+                <a href="{{url_for('NLP')}}">
+                <button id="nextpage">Submit</button>
+                </a>
+            </div>
+        </form>
+    </div>
+    
+</body>
+</html>

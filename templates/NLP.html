@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins" rel="stylesheet">
+    <title>NPL</title>
+    <link rel="icon" href="{{ url_for('static', filename='css/Assets/LOGO.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/nlpStyle.css') }}">
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <h1>YOUR NUTRITION YESTERDAY</h1>
+        </header>
+
+        {% for item in datas['items'] %}
+        <section class="columns">
+
+
+            <div class="column">
+                <h2>{{item['name']}} - {{item['serving_size_g']}} grams</h2>
+                <h2>{{item['calories']}} calories</h2>
+                
+                
+                <div class="split-container">
+                    <div class="left-side">
+                        <p>'Sugar (grams)' : <b>{{ item['sugar_g'] }}</b></p>
+                        <p>'Fiber (grams)' : <b>{{ item['fiber_g'] }}</b></p>
+                        <p>'Sodium (mg)' : <b>{{ item['sodium_mg'] }}</b></p>
+                        <p>'Potassium (mg)' : <b>{{ item['potassium_mg'] }}</b></p>
+                        <p>'Saturated Fat (grams)' : <b>{{ item['fat_saturated_g'] }}</b></p>
+
+                    </div>
+                    <div class="right-side">
+                        <p>'Total Fat (grams)' : <b>{{ item['fat_total_g'] }}</b></p>
+                        <p>'Cholesterol (mg)' : <b>{{ item['cholesterol_mg'] }}</b></p>
+                        <p>'Protein (grams)' : <b>{{ item['protein_g'] }}</b></p>
+                        <p>'Total Carbohydrates (grams)' : <b>{{ item['carbohydrates_total_g'] }}</b></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% endfor %}
+
+        <div class="button">
+            <a href="../Summary/summary.html">
+                <button id="nextpage">Next</button>
+            </a>
+        </div>
+    </div>
+    
+</body> 
+</html>

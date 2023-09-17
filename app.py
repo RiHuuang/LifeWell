@@ -1,6 +1,6 @@
 import requests
 from flask import Flask, request, jsonify, render_template, redirect, url_for, flash, session
-from config import Config
+from config import Config   
 import re
 
 app = Flask(__name__)
@@ -100,6 +100,8 @@ def meal_query(query):
     BASE_URL = this_config.URL_NPL_NINCAL
     response = requests.get(
         BASE_URL + query, headers={'X-Api-Key': this_config.X_API_KEY})
+    
+    return response.json()
 
 @app.route("/", methods = ['POST', 'GET'])
 def main_routes():
@@ -133,6 +135,27 @@ def loading():
 @app.route("/profile")
 def profile():
     return render_template('home.html')
+
+
+
+# wdyey = what did you eat yesterday
+@app.route("/wdyey", methods=['POST', 'GET'])
+def wdyey():
+    
+    if request.method == 'POST':
+        foodquery = request.form.get('foodquery')
+
+        return redirect(url_for('NLP', foodquery = foodquery))
+    return render_template('asking.html')
+
+
+@app.route("/NLP", methods=['POST', 'GET'])
+def NLP():
+    foodquery = request.args.get('foodquery')
+
+    datas = meal_query(foodquery)
+    return render_template('NLP.html', datas=datas)
+
 
 
 @app.route('/calculate', methods=['POST','GET'])
@@ -258,7 +281,6 @@ def get_meal():
         print("ini title", title)
         image_datas[meal['title']] = get_meal_image(title)
     
-    print("INI URL NYA NIH ANJENG", image_datas[meal['title']])
 
     return render_template('meals.html', datas=datas, image_datas=image_datas)
 
@@ -285,13 +307,6 @@ def muscle():
         return redirect(url_for('womoves', muscle=muscle, intensity=intensity))
         
     return render_template('muscle.html')
-
-
-
-
-
-
-
 
 @app.route('/womoves', methods=['GET', 'POST'])
 def womoves():
@@ -360,4 +375,33 @@ ctrl + x lalu y untuk save.
 deactivate
 lalu 
 ..\..\..\webEnv\Scripts\activate
+'''
+
+
+
+'''
+
+{
+      "sugar_g": 13.3,
+      "fiber_g": 4,
+      "sodium_mg": 8,
+      "potassium_mg": 99,
+      "fat_saturated_g": 0.1,
+      
+      "fat_total_g": 0.5,
+      "cholesterol_mg": 0,
+      "protein_g": 3.9,
+      "carbohydrates_total_g": 28.6
+    }
+
+<p>'Sugar (grams)' : <b>{{ items['sugar_g'] }}</b></p>
+<p>'Fiber (grams)' : <b>{{ items['fiber_g'] }}</b></p>
+<p>'Sodium (mg)' : <b>{{ items['sodium_mg'] }}</b></p>
+<p>'Potassium (mg)' : <b>{{ items['potassium_mg'] }}</b></p>
+<p>'Saturated Fat (grams)' : <b>{{ items['fat_saturated_g'] }}</b></p>
+<p>'Total Fat (grams)' : <b>{{ items['fat_total_g'] }}</b></p>
+<p>'Cholesterol (mg)' : <b>{{ items['cholesterol_mg'] }}</b></p>
+<p>'Protein (grams)' : <b>{{ items['protein_g'] }}</b></p>
+<p>'Total Carbohydrates (grams)' : <b>{{ items['carbohydrates_total_g'] }}</b></p>
+
 '''
