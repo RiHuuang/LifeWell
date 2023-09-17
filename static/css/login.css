@@ -39,3 +39,23 @@ button{
     height: 35px;
     margin: 0px 120px;
 }
+
+
+.radio-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.kotakan{
+    display: flex;
+    margin: auto;
+}
+
+#male{
+    margin-top: -1px;
+}
+#female{
+    margin-top: -1px;
+}
+
