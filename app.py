@@ -143,6 +143,9 @@ def calculate():
         weight = request.form.get('input_berat')
         activity = request.form.get('activity')
 
+        session['weight'] = weight
+        session['age'] = age
+
         # print("ini request form ", height, weight, activity)
 
         bmi = float("{:.2f}".format(float(calculate_bmi(height, weight))))
@@ -259,9 +262,28 @@ def get_meal():
     return render_template('meals.html', datas=datas, image_datas=image_datas)
 
 
-@app.route('/summary')
+@app.route('/summary', methods=['GET','POST'])
 def summary():
-    return render_template('summary.html')
+    print("INI MASUK KE DALAM SUMMARY")
+    print("Requests method",request.method)
+    weight = session.get('weight')
+    age = session.get('age')
+    age = int(age)
+    # protein = (1.2 * weight)
+    # print("berat badan : ",weight)
+    # print(protein)
+    print(age)
+    if(age >= 1 and age < 3):
+        mineral = '700 mg'
+    elif(age >= 4 and age < 8):
+        mineral = '1000 mg'
+    else:
+        mineral = '1300 mg'
+
+    protein = weight
+    
+
+    return render_template('summary.html',mineral = mineral, protein=protein)
 
 
 
