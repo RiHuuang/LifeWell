@@ -288,6 +288,11 @@ def summary():
 
 
 
+
+
+
+
+
 @app.route('/muscle', methods=['GET','POST'])
 def muscle():
     print("Requests method",request.method)
