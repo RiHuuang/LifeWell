@@ -13,6 +13,19 @@
     </style>
 </head>
 <body>
+
+    <a href="{{url_for('wdyey')}}">
+    <div class="containerbawah" id="searchbawah">
+        <div class="button">
+            <img src="{{ url_for('static', filename='css/Assets/search.png') }}" id="buttonbawah">
+            <p id="pbawah">
+                I am curios with nutritions in my food
+            </p>
+
+        </div>
+    </div>
+    </a>
+
     <div class="container">
         <div class="header">
             <div class="sambutan">
@@ -34,7 +47,7 @@
                 <div class="button">
                     <a href="{{ url_for('calculate') }}">
                         <div class="iconmeals">
-                            <img src="{{ url_for('static', filename='css/Assets/Meal.png') }}" alt="">
+                            <img src="{{ url_for('static', filename='css/Assets/Meal.png') }}" id="buttonatas" alt="">
                         </div>
                     </a>
                     <p><b>Meals</b></p>
@@ -50,7 +63,7 @@
                 <div class="button">
                     <a href="{{ url_for('muscle') }}">
                         <div class="iconworkout">
-                            <img src="{{ url_for('static', filename='css/Assets/Workout.png') }}" alt="">
+                            <img src="{{ url_for('static', filename='css/Assets/Workout.png') }}" id="buttonatas" alt="">
                         </div>
                     </a>
                     <p><b>Workout</b></p>
@@ -64,6 +77,8 @@
             </div>
         </div>
     </div>
+
+ 
     
 
 

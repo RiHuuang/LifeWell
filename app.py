@@ -148,9 +148,8 @@ def wdyey():
 @app.route("/NLP", methods=['POST', 'GET'])
 def NLP():
     foodquery = request.args.get('foodquery')
-    print(foodquery)
+
     datas = meal_query(foodquery)
-    print("INI SUGAR NYA YA",datas)
     return render_template('NLP.html', datas=datas)
 
 
