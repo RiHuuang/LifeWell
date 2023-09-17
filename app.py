@@ -1,6 +1,6 @@
 import requests
 from flask import Flask, request, jsonify, render_template, redirect, url_for, flash, session
-from config import Config
+from config import Config   
 import re
 
 app = Flask(__name__)
@@ -100,6 +100,8 @@ def meal_query(query):
     BASE_URL = this_config.URL_NPL_NINCAL
     response = requests.get(
         BASE_URL + query, headers={'X-Api-Key': this_config.X_API_KEY})
+    
+    return response.text
 
 @app.route("/", methods = ['POST', 'GET'])
 def main_routes():
@@ -129,6 +131,28 @@ def loading():
 def profile():
     # return render_template('profile.html')
     pass
+
+
+
+# wdyey = what did you eat yesterday
+@app.route("/wdyey", methods=['POST', 'GET'])
+def wdyey():
+    
+    if request.method == 'POST':
+        foodquery = request.form.get('foodquery')
+
+        return redirect(url_for('NLP', foodquery = foodquery))
+    return render_template('asking.html')
+
+
+@app.route("/NLP", methods=['POST', 'GET'])
+def NLP():
+    foodquery = request.args.get('foodquery')
+    print(foodquery)
+    datas = meal_query(foodquery)
+    print("INI SUGAR NYA YA",datas)
+    return render_template('NLP.html', datas=datas)
+
 
 
 @app.route('/calculate', methods=['POST','GET'])
@@ -254,7 +278,6 @@ def get_meal():
         print("ini title", title)
         image_datas[meal['title']] = get_meal_image(title)
     
-    print("INI URL NYA NIH ANJENG", image_datas[meal['title']])
 
     return render_template('meals.html', datas=datas, image_datas=image_datas)
 
@@ -265,89 +288,71 @@ def summary():
 
 
 
-
-
-
-
-
-@app.route('/workout', methods=['GET','POST'])
-def workout():
+@app.route('/muscle', methods=['GET','POST'])
+def muscle():
     print("Requests method",request.method)
     if request.method == 'POST':
         muscle = request.form.get('muscleList')
-        intensity = request.form.get('intensityLevel')
+        intensity = request.form.get('intensitylevel')
         print(muscle,intensity)
         
-        return redirect(url_for('womoves'))
+        return redirect(url_for('womoves', muscle=muscle, intensity=intensity))
         
     return render_template('muscle.html')
 
-
-
-
-
-
-
-
 @app.route('/womoves', methods=['GET', 'POST'])
 def womoves():
-    
-    print("ini udah masuk ke dalam rute womoves, muscle nya =", muscle)
-    muscle= request.args.getlist('muscleList')
-    intensity = request.args.getlist('intensitylevel')
+    print("Requests method",request.method)
+    if request.method == 'GET':
+        print("Ini udah masuk kedalam rute womoves")
+        muscle = request.args.get('muscle')
+        intensity = request.args.get('intensity')
+        print(muscle,intensity)
 
     if muscle == "cardio":
         api_url = "https://exercisedb.p.rapidapi.com/exercises/bodyPart/cardio"
-    else:
-        print('tes')# Ganti dengan URL API yang sesuai
+    if muscle == "neck":
+        api_url = "https://exercisedb.p.rapidapi.com/exercises/bodyPart/neck"
+    if muscle == "shoulders":
+        api_url = "https://exercisedb.p.rapidapi.com/exercises/bodyPart/shoulders"
+    if muscle == "chest":
+        api_url = "https://exercisedb.p.rapidapi.com/exercises/bodyPart/chest"
+    if muscle == "back":
+        api_url = "https://exercisedb.p.rapidapi.com/exercises/bodyPart/back"
+    if muscle == "waist":
+        api_url = "https://exercisedb.p.rapidapi.com/exercises/bodyPart/waist"
+    if muscle == "lower_arms":
+        api_url = "https://exercisedb.p.rapidapi.com/exercises/bodyPart/lower%20arms"
+    if muscle == "lower_legs":
+        api_url = "https://exercisedb.p.rapidapi.com/exercises/bodyPart/lower%20legs"
+    if muscle == "upper_arms":
+        api_url = "https://exercisedb.p.rapidapi.com/exercises/bodyPart/upper%20arms"
+    if muscle == "upper_legs":
+        api_url = "https://exercisedb.p.rapidapi.com/exercises/bodyPart/upper%20legs"
 
     headers = {
-        "X-RapidAPI-Key": "685949c1d7mshf77a8318efe0eb6p1fc458jsn4229e07c81e8",
-        "X-RapidAPI-Host": "exercisedb.p.rapidapi.com"
+        'X-RapidAPI-Key': 'b958d466damsh993cd90275c9ef0p1de1f2jsnb9744cfaf79c',
+        'X-RapidAPI-Host': 'exercisedb.p.rapidapi.com'
+
     }
     response = requests.get(api_url,headers=headers)
     
-    
-    
     if response.status_code == 200:
         all_data = response.json()
-        data = [exercise for exercise in all_data if exercise.get("equipment") == "body weight"][:8]
-    else:
-        data = []  # Data kosong jika terjadi kesalahannnn
-
-    # # punya ipenk
-    # api_url = "https://exercisedb.p.rapidapi.com/exercises/bodyPart/back"  # Ganti dengan URL API yang sesuai
-
-    # headers = {
-    #     "X-RapidAPI-Key": "685949c1d7mshf77a8318efe0eb6p1fc458jsn4229e07c81e8",
-    #     "X-RapidAPI-Host": "exercisedb.p.rapidapi.com"
-    # }
-    # response = requests.get(api_url,headers=headers)
-
-    # if response.status_code == 200:
-    #     all_data = response.json()
-    #     data = [exercise for exercise in all_data if exercise.get("equipment") == "body weight"][:8]
-    # else:
-    #     data = []  # Data kosong jika terjadi kesalahan
-    @app.route('/womoves', methods=['GET', 'POST'])
-    def womoves():
-    
-        print("ini udah masuk ke dalam rute womoves, muscle nya =", muscle)
-        muscle= request.args.getlist('muscleList')
-        intensity = request.args.getlist('intensitylevel')
-
-        if muscle == "cardio":
-            api_url = "https://exercisedb.p.rapidapi.com/exercises/bodyPart/cardio"
+        if intensity == "Heavy" and muscle == "cardio":
+            data = [exercise for exercise in all_data if exercise.get("equipment") != "body weight"]
+        elif intensity == 'Moderate' and muscle == 'shoulders':
+            data = [exercise for exercise in all_data if exercise.get("equipment") == "band"][:8]
+        elif intensity == 'Heavy' and muscle == 'shoulders':
+            data = [exercise for exercise in all_data if exercise.get("equipment") == "cable"][:8]
+        elif intensity == "Heavy":
+            data = [exercise for exercise in all_data if exercise.get("equipment") != "body weight"][:8]
         else:
-            api_url = "https://exercisedb.p.rapidapi.com/exercises/bodyPart/neck"  # Ganti dengan URL API yang sesuai
+            data = [exercise for exercise in all_data if exercise.get("equipment") == "body weight"][:8]
+    else:
+        data = []  # Data kosong jika terjadi kesalahann
 
-        headers = {
-            "X-RapidAPI-Key": "685949c1d7mshf77a8318efe0eb6p1fc458jsn4229e07c81e8",
-            "X-RapidAPI-Host": "exercisedb.p.rapidapi.com"
-        }
-        response = requests.get(api_url,headers=headers)    
-            
-        return render_template('womoves.html', data=data)
+    return render_template('womoves.html', data=data)
 
 
 
@@ -362,4 +367,33 @@ ctrl + x lalu y untuk save.
 deactivate
 lalu 
 ..\..\..\webEnv\Scripts\activate
+'''
+
+
+
+'''
+
+{
+      "sugar_g": 13.3,
+      "fiber_g": 4,
+      "sodium_mg": 8,
+      "potassium_mg": 99,
+      "fat_saturated_g": 0.1,
+      
+      "fat_total_g": 0.5,
+      "cholesterol_mg": 0,
+      "protein_g": 3.9,
+      "carbohydrates_total_g": 28.6
+    }
+
+<p>'Sugar (grams)' : <b>{{ items['sugar_g'] }}</b></p>
+<p>'Fiber (grams)' : <b>{{ items['fiber_g'] }}</b></p>
+<p>'Sodium (mg)' : <b>{{ items['sodium_mg'] }}</b></p>
+<p>'Potassium (mg)' : <b>{{ items['potassium_mg'] }}</b></p>
+<p>'Saturated Fat (grams)' : <b>{{ items['fat_saturated_g'] }}</b></p>
+<p>'Total Fat (grams)' : <b>{{ items['fat_total_g'] }}</b></p>
+<p>'Cholesterol (mg)' : <b>{{ items['cholesterol_mg'] }}</b></p>
+<p>'Protein (grams)' : <b>{{ items['protein_g'] }}</b></p>
+<p>'Total Carbohydrates (grams)' : <b>{{ items['carbohydrates_total_g'] }}</b></p>
+
 '''
