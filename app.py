@@ -104,11 +104,12 @@ def meal_query(query):
 @app.route("/", methods = ['POST', 'GET'])
 def main_routes():
     if request.method == 'POST':
-        nama = request.form.get("name")
+        name = request.form.get("name")
         age = request.form.get("age")
         gender = request.form.get("gender")
         password = request.form.get("password")
         
+        session['name'] = name
         session['age'] = age
         session['gender'] = gender
 
@@ -118,7 +119,11 @@ def main_routes():
 
 @app.route("/home")
 def home():
-    return render_template('home.html')
+    name = session.get('name', None)
+    gender = session.get('gender', None)
+    age = session.get('age', None)
+    print("MASUK HOME ", name, gender, age)
+    return render_template('home.html', name=name)
 
 
 @app.route('/loading')
@@ -127,8 +132,7 @@ def loading():
 
 @app.route("/profile")
 def profile():
-    # return render_template('profile.html')
-    pass
+    return render_template('home.html')
 
 
 @app.route('/calculate', methods=['POST','GET'])
