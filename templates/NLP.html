@@ -14,11 +14,10 @@
             <h1>YOUR NUTRITION YESTERDAY</h1>
         </header>
 
+        {% for item in datas['items'] %}
         <section class="columns">
 
 
-            <p>{{datas}}</p>
-            {% for item in datas %}
             <div class="column">
                 <h2>{{item['name']}} - {{item['serving_size_g']}} grams</h2>
                 <h2>{{item['calories']}} calories</h2>
@@ -41,8 +40,8 @@
                     </div>
                 </div>
             </div>
-            {% endfor %}
         </section>
+        {% endfor %}
 
         <div class="button">
             <a href="../Summary/summary.html">

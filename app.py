@@ -101,7 +101,7 @@ def meal_query(query):
     response = requests.get(
         BASE_URL + query, headers={'X-Api-Key': this_config.X_API_KEY})
     
-    return response.text
+    return response.json()
 
 @app.route("/", methods = ['POST', 'GET'])
 def main_routes():
