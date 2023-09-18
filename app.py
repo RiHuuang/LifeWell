@@ -272,8 +272,6 @@ def get_meal():
     print("Masuk ke getmeal")
     timeFrame = request.args.getlist('timeFrame')
     targetCalories = request.args.getlist('targetCalories')
-    targetCalories = [float(item) for item in targetCalories]
-    print(type(targetCalories))
     goals = targetCalories
     diet = request.args.getlist('diet')
     exclude = request.args.getlist('exclude')
@@ -322,13 +320,14 @@ def summary():
     protein = weight * 1.2
     targetCalories = session.get('goals')
     print("ini target",targetCalories)
-    print(type(calories))
-    targetCalories = [float(item) for item in targetCalories]
+    initarget = targetCalories[0]
+    targetCalories = float(initarget)
     print(type(targetCalories))
-    # if(calories < targetCalories):
-    karbo = "{:.2f}".format((0.65 * calories)/4)
-    # elif (calories > targetCalories):
-    #     karbo = "{:.2f}".format((0.4 * calories)/4)
+    print(type(calories))
+    if(calories < targetCalories):
+        karbo = "{:.2f}".format((0.65 * calories)/4)
+    elif (calories > targetCalories):
+        karbo = "{:.2f}".format((0.4 * calories)/4)
     
     fat = "{:.2f}".format((0.2 * calories)/9)
 
