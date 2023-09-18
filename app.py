@@ -315,8 +315,8 @@ def summary():
 
     protein = weight * 1.2
     
-    karbo = (0.65 * calories)/4
-    fat = (0.2 * calories)/9
+    karbo = "{:.2f}".format((0.65 * calories)/4)
+    fat = "{:.2f}".format((0.2 * calories)/9)
 
     return render_template('summary.html',mineral = mineral, protein=protein, calories=calories , karbo=karbo, fat=fat)
 
