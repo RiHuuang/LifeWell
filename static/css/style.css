@@ -271,14 +271,13 @@ input[type=text], select{
 }
 
 .button{
-    margin-left: 80%;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: -5%;
+    /* align-items: center; */
+    /* margin-top: -5%; */
 }
 
 #nextpage{
+    margin-left: 100%;
     border-radius: 10px;
     width: 80px;
     height: 40px;
@@ -290,7 +289,23 @@ input[type=text], select{
 
 #nextpage:hover{
     box-shadow: 0px 0px 5px 4px rgba(0, 0, 0, 0.25);
-    transition: 200ms;
+    transition: 200ms;
+}
+
+#prevpage{
+    margin-left: -100%;
+    border-radius: 10px;
+    width: 80px;
+    height: 40px;
+    font-size: 20px;
+    background-color: white;
+    border-width: 0;
+    cursor: pointer;
+}
+
+#prevpage:hover{
+    box-shadow: 0px 0px 5px 4px rgba(0, 0, 0, 0.25);
+    transition: 200ms;
 }
 
 .outer{
