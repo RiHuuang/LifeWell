@@ -134,7 +134,8 @@ def loading():
 
 @app.route("/profile")
 def profile():
-    return render_template('home.html')
+    name = session.get('name', None)
+    return render_template('home.html', name=name)
 
 
 

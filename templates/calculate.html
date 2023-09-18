@@ -86,11 +86,17 @@
                 </section>
             </div>
 
-
             <div class="button">
-                <a href="{{ url_for('summary') }}">
-                    <button id="nextpage">Next</button>
-                </a>
+                <div class="nextpage">
+                    <a href="{{ url_for('home') }}">
+                        <button id="prevpage">Back</button>
+                    </a>
+                </div>
+                <div class="prevpage">
+                    <a href="{{ url_for('summary') }}">
+                        <button id="nextpage">Next</button>
+                    </a>
+                </div>
             </div>
 
             <script src = "{{ url_for('static', filename='js/script.js') }}" defer></script>
