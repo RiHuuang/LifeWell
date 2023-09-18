@@ -296,7 +296,7 @@ def summary():
     print(type(weight))
     weight = float(weight)
     print(type(weight))
-    age = session.get('age')
+    age = session.get('age') 
     age = int(age)
     # protein = (1.2 * weight)
     # print("berat badan : ",weight)
