@@ -169,7 +169,7 @@ def calculate():
         height = request.form.get('input_tinggi')
         weight = request.form.get('input_berat')
         activity = request.form.get('activity')
-
+        print("ini",activity)
         session['weight'] = weight
         session['age'] = age
 
