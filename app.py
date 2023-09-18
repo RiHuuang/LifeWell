@@ -272,6 +272,8 @@ def get_meal():
     print("Masuk ke getmeal")
     timeFrame = request.args.getlist('timeFrame')
     targetCalories = request.args.getlist('targetCalories')
+    targetCalories = [float(item) for item in targetCalories]
+    print(type(targetCalories))
     goals = targetCalories
     diet = request.args.getlist('diet')
     exclude = request.args.getlist('exclude')
