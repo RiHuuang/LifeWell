@@ -31,7 +31,7 @@ def calculate_bmi(height, weight):
             return "Invalid input. Height and weight must be positive numbers."
 
         bmi = weight_kg / ((height_cm / 100) ** 2)
-        return str(bmi)
+        return str(bmi) 
     except ValueError:
         return "Invalid input. Height and weight must be numeric values."
 
@@ -293,6 +293,9 @@ def summary():
     print("INI MASUK KE DALAM SUMMARY")
     print("Requests method",request.method)
     weight = session.get('weight')
+    print(type(weight))
+    weight = float(weight)
+    print(type(weight))
     age = session.get('age')
     age = int(age)
     # protein = (1.2 * weight)
@@ -306,7 +309,7 @@ def summary():
     else:
         mineral = '1300 mg'
 
-    protein = weight
+    protein = weight * 1.2
     
 
     return render_template('summary.html',mineral = mineral, protein=protein)
@@ -387,7 +390,7 @@ def womoves():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=8800)
+    app.run(debug=True, port=8808)
 
 
 

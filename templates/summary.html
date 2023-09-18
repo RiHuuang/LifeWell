@@ -23,7 +23,7 @@
                     <img src="{{ url_for('static', filename='css/Assets/water.png') }}" alt="" id="iconneeded">
                     
                     <div class="textbox">
-                        <h2 id="ganti" name="gantiWater">2L</h2>
+                        <h2 id="ganti" name="gantiWater">2 L</h2>
                         <p id="judulnya"> Water </p>
                     </div>
                 </div>
@@ -41,9 +41,7 @@
                     <img src="{{ url_for('static', filename='css/Assets/protein.png') }}" alt="" id="iconneeded">
                     
                     <div class="textbox">
-                        <h2 id="ganti" name="gantiProtein">{% for data in protein %}
-                            {{ data }}
-                            {% endfor %} gr
+                        <h2 id="ganti" name="gantiProtein"> {{protein}} gr
                         </h2>
                         <p id="judulnya"> Protein </p>
                     </div>
@@ -56,7 +54,7 @@
                     <img src="{{ url_for('static', filename='css/Assets/vitamin.png') }}" alt="" id="iconneeded">
                     
                     <div class="textbox">
-                        <h2 id="ganti" name="gantiVitamin">2L</h2>
+                        <h2 id="ganti" name="gantiVitamin">2 L</h2>
                         <p id="judulnya"> Vitamin </p>
                     </div>
                 </div>
@@ -65,7 +63,7 @@
                     <img src="{{ url_for('static', filename='css/Assets/fat.png') }}" alt="" id="iconneeded">
                     
                     <div class="textbox">
-                        <h2 id="ganti" name="gantiFat">2L</h2>
+                        <h2 id="ganti" name="gantiFat">67 gr</h2>
                         <p id="judulnya"> Fat </p>
                     </div>
                 </div>
