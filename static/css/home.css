@@ -1,6 +1,7 @@
 body{
     background: linear-gradient(90deg, rgba(3,141,116,1) 0%, rgba(9,80,144,1) 100%);
     font-family: 'Poppins', sans-serif;
+    margin-top: 8vh;
 }
 
 
@@ -67,18 +68,55 @@ body{
 }
 
 .button img{
-    width: 80%;
-    margin-top: 25px;
+    /* width: 80%;
+    margin-top: 25px; */
 }
 
 .button p{
     font-size: 28px;
 }
 
+#buttonatas{
+    width: 80%;
+    margin-top: 25px;
+}
+
+.containerbawah{
+    background-color: rgba(255, 255, 255, 0.9);
+    /* background-color: white; */
+    padding: 20px 35px;
+    margin: 20px;
+    border-radius: 50px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    color: black;
+}
+
+#buttonbawah{
+    width: 30px;
+}
+
 .detail{
     text-align: justify;
 }
 
+#pbawah{
+    font-size: 18px;
+    margin-left: 15px;
+    color: black;
+}
+
+a{
+    text-decoration: none;
+}
+
+#searchbawah:hover{
+    font-weight: bold;
+    box-shadow: 0px 0px 10px 2px rgb(190, 190, 190);
+    background-color: rgb(233, 233, 233);
+    transition: 500ms;
+}
 
 .iconworkout{
     text-align: center;
