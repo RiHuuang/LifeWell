@@ -298,6 +298,14 @@ def summary():
     print(type(weight))
     age = session.get('age') 
     age = int(age)
+    bmr = session.get('bmr', None)
+    activity = session.get('activity', None)
+
+    if bmr is None or activity is None:
+        flash("BMR or Activity not found in session", 'danger')
+        return redirect(url_for('calculate'))
+    
+    calories = float("{:.2f}".format(float(calculate_daily_calories(bmr, activity))))
     # protein = (1.2 * weight)
     # print("berat badan : ",weight)
     # print(protein)
@@ -310,9 +318,10 @@ def summary():
         mineral = '1300 mg'
 
     protein = weight * 1.2
+
     
 
-    return render_template('summary.html',mineral = mineral, protein=protein)
+    return render_template('summary.html',mineral = mineral, protein=protein, calories=calories)
 
 
 
