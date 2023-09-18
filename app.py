@@ -301,27 +301,24 @@ def summary():
     bmr = session.get('bmr', None)
     activity = session.get('activity', None)
 
-    if bmr is None or activity is None:
-        flash("BMR or Activity not found in session", 'danger')
-        return redirect(url_for('calculate'))
-    
     calories = float("{:.2f}".format(float(calculate_daily_calories(bmr, activity))))
     # protein = (1.2 * weight)
     # print("berat badan : ",weight)
     # print(protein)
     print(age)
-    if(age >= 1 and age < 3):
+    if(age >= 1 and age <= 3):
         mineral = '700 mg'
-    elif(age >= 4 and age < 8):
+    elif(age >= 4 and age <= 8):
         mineral = '1000 mg'
     else:
         mineral = '1300 mg'
 
     protein = weight * 1.2
-
     
+    karbo = (0.65 * calories)/4
+    fat = (0.2 * calories)/9
 
-    return render_template('summary.html',mineral = mineral, protein=protein, calories=calories)
+    return render_template('summary.html',mineral = mineral, protein=protein, calories=calories , karbo=karbo, fat=fat)
 
 
 
