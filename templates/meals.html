@@ -18,34 +18,20 @@
             {% for meal in datas['meals'] %}    
             <div class="column">
                 <h2>{{meal['title']}}</h2>
-                <br>
-                <img src="{{image_datas[meal['title']]}}" alt="deskripsi gambar" width="220" height="220">
+                <img class="gambar" src="{{image_datas[meal['title']]}}" alt="deskripsi gambar" width="220" height="220">
                 <p>Ready in Minute : {{ meal['readyInMinutes'] }}</p>
                 <p>Servings : {{ meal['servings'] }}</p>
                 <p>Source URL: <a href="{{ meal['sourceUrl'] }}">{{ meal['sourceUrl'] }}</a></p>
             </div>
             {% endfor %}
-            <!-- <div class="column">
-                <h2>GNOCCI WITH VEGETABLES</h2>
-                <br>
-                <img src="download (4).jpeg" alt="deskripsi gambar" width="220" height="220">
-                <p>Ready in Minute : 20</p>
-                <p>Servings : 1</p>
-            </div>
-            <div class="column">
-                <h2>PAELLA CATALANE</h2>
-                <br>
-                <img src="download (4).jpeg" alt="deskripsi gambar" width="220" height="220">
-                <p>Ready in Minute : 45</p>
-                <p>Servings : 10</p>
-            </div> -->
 
         </section>
+        
         <div class="button">
             <a href="{{url_for('summary')}}">
-            <button id="nextpage">Next</button>
+            <button id="nextpage">SUMMARY</button>
             </a>
-        </div>
+        </div>
     </div>
     
 </body>
