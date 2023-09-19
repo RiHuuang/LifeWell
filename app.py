@@ -264,8 +264,7 @@ def daily_meals():
             return redirect(url_for('daily_meals'))
 
         # datas = get_meal_plan(timeFrame, targetCalories, diet, exclude)
-        # return redirect(url_for('get_meal', timeFrame=timeFrame, targetCalories=targetCalories, diet=diet, exclude=exclude))
-        return redirect(url_for('summary', timeFrame = timeFrame, targetCalories = targetCalories))
+        return redirect(url_for('get_meal', timeFrame=timeFrame, targetCalories=targetCalories, diet=diet, exclude=exclude))
 
     return render_template('daily_meals.html', formatted_calories=formatted_calories, options=options)
 
@@ -275,7 +274,6 @@ def get_meal():
     print("Masuk ke getmeal")
     timeFrame = request.args.getlist('timeFrame')
     targetCalories = request.args.getlist('targetCalories')
-    goals = targetCalories
     diet = request.args.getlist('diet')
     exclude = request.args.getlist('exclude')
     
@@ -284,7 +282,6 @@ def get_meal():
     print("->>>>> datas ",datas)
     
     session['goals'] = goals
-    
 
     image_datas = dict({})
     for meal in datas['meals']:
@@ -310,7 +307,9 @@ def summary():
     activity = session.get('activity', None)
 
     calories = float("{:.2f}".format(float(calculate_daily_calories(bmr, activity))))
-
+    # protein = (1.2 * weight)
+    # print("berat badan : ",weight)
+    # print(protein)
     print(age)
     if(age >= 1 and age <= 3):
         mineral = '700 mg'
@@ -320,15 +319,15 @@ def summary():
         mineral = '1300 mg'
 
     protein = weight * 1.2
-    targetCalories = request.args.get('targetCalories')
-    print("ini target ::=::>>",targetCalories)
-    # initarget = request.args.getlist('targetCalories')
-    initarget = float(targetCalories[0])
+    targetCalories = session.get('goals')
+    print("ini target",targetCalories)
+    initarget = targetCalories[0]
+    targetCalories = float(initarget)
     print(type(targetCalories))
     print(type(calories))
-    if(calories < initarget):
+    if(calories < targetCalories):
         karbo = "{:.2f}".format((0.65 * calories)/4)
-    elif (calories > initarget):
+    elif (calories > targetCalories):
         karbo = "{:.2f}".format((0.4 * calories)/4)
     
     fat = "{:.2f}".format((0.2 * calories)/9)
@@ -411,7 +410,7 @@ def womoves():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=8808)
+    app.run(debug=True, port=8800)
 
 
 
