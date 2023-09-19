@@ -424,30 +424,3 @@ lalu
 '''
 
 
-
-'''
-
-{
-      "sugar_g": 13.3,
-      "fiber_g": 4,
-      "sodium_mg": 8,
-      "potassium_mg": 99,
-      "fat_saturated_g": 0.1,
-      
-      "fat_total_g": 0.5,
-      "cholesterol_mg": 0,
-      "protein_g": 3.9,
-      "carbohydrates_total_g": 28.6
-    }
-
-<p>'Sugar (grams)' : <b>{{ items['sugar_g'] }}</b></p>
-<p>'Fiber (grams)' : <b>{{ items['fiber_g'] }}</b></p>
-<p>'Sodium (mg)' : <b>{{ items['sodium_mg'] }}</b></p>
-<p>'Potassium (mg)' : <b>{{ items['potassium_mg'] }}</b></p>
-<p>'Saturated Fat (grams)' : <b>{{ items['fat_saturated_g'] }}</b></p>
-<p>'Total Fat (grams)' : <b>{{ items['fat_total_g'] }}</b></p>
-<p>'Cholesterol (mg)' : <b>{{ items['cholesterol_mg'] }}</b></p>
-<p>'Protein (grams)' : <b>{{ items['protein_g'] }}</b></p>
-<p>'Total Carbohydrates (grams)' : <b>{{ items['carbohydrates_total_g'] }}</b></p>
-
-'''
