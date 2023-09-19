@@ -31,7 +31,7 @@ def calculate_bmi(height, weight):
             return "Invalid input. Height and weight must be positive numbers."
 
         bmi = weight_kg / ((height_cm / 100) ** 2)
-        return str(bmi)
+        return str(bmi) 
     except ValueError:
         return "Invalid input. Height and weight must be numeric values."
 
@@ -134,7 +134,8 @@ def loading():
 
 @app.route("/profile")
 def profile():
-    return render_template('home.html')
+    name = session.get('name', None)
+    return render_template('home.html', name=name)
 
 
 
@@ -169,6 +170,9 @@ def calculate():
         height = request.form.get('input_tinggi')
         weight = request.form.get('input_berat')
         activity = request.form.get('activity')
+        print("ini",activity)
+        session['weight'] = weight
+        session['age'] = age
 
         # print("ini request form ", height, weight, activity)
 
@@ -234,8 +238,10 @@ def daily_meals():
 
     if request.method == 'POST':
         print('jalan')
+        print('HAO HAO HAO HAO')
         timeFrame = request.form.getlist('timeFrame')
         targetCalories = request.form.getlist('goals')
+        print('ini target kalo :', targetCalories)
         diet = request.form.getlist('diet')
         exclude = request.form.getlist('exclude')
 
@@ -268,13 +274,16 @@ def get_meal():
     print("Masuk ke getmeal")
     timeFrame = request.args.getlist('timeFrame')
     targetCalories = request.args.getlist('targetCalories')
+    goals = targetCalories
     diet = request.args.getlist('diet')
     exclude = request.args.getlist('exclude')
-
+    
     datas = get_meal_plan(
         timeFrame=timeFrame, targetCalories=targetCalories, diet=diet, exclude=exclude)
-    # print("->>>>> datas ",datas)
+    print("->>>>> datas ",datas)
     
+    session['goals'] = goals
+
     image_datas = dict({})
     for meal in datas['meals']:
         title = meal['title']
@@ -285,9 +294,46 @@ def get_meal():
     return render_template('meals.html', datas=datas, image_datas=image_datas)
 
 
-@app.route('/summary')
+@app.route('/summary', methods=['GET','POST'])
 def summary():
-    return render_template('summary.html')
+    print("INI MASUK KE DALAM SUMMARY")
+    print("Requests method",request.method)
+    weight = session.get('weight')
+    print(type(weight))
+    weight = float(weight)
+    print(type(weight))
+    age = session.get('age') 
+    age = int(age)
+    bmr = session.get('bmr', None)
+    activity = session.get('activity', None)
+
+    calories = float("{:.2f}".format(float(calculate_daily_calories(bmr, activity))))
+    # protein = (1.2 * weight)
+    # print("berat badan : ",weight)
+    # print(protein)
+    print(age)
+    if(age >= 1 and age <= 3):
+        mineral = '700 mg'
+    elif(age >= 4 and age <= 8):
+        mineral = '1000 mg'
+    else:
+        mineral = '1300 mg'
+
+    protein = weight * 1.2
+    targetCalories = session.get('goals')
+    print("ini target",targetCalories)
+    initarget = targetCalories[0]
+    targetCalories = float(initarget)
+    print(type(targetCalories))
+    print(type(calories))
+    if(calories < targetCalories):
+        karbo = "{:.2f}".format((0.65 * calories)/4)
+    elif (calories > targetCalories):
+        karbo = "{:.2f}".format((0.4 * calories)/4)
+    
+    fat = "{:.2f}".format((0.2 * calories)/9)
+
+    return render_template('summary.html',mineral = mineral, protein=protein, calories=calories , karbo=karbo, fat=fat)
 
 
 
