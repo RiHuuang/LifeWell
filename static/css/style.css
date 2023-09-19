@@ -34,7 +34,6 @@ h1 {
     box-shadow: 0 10px 15px (0,0,0,0.25);
     display: grid;
     gap: 1rem;
-    margin-left: 31%;
 }
 
 .calculator{
@@ -254,10 +253,10 @@ h1 {
 
 .activity-container select{
     width: 66%;
+    height: 120%;
     padding: 5.5px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    
 }
 
 input[type=text], select{
@@ -267,7 +266,7 @@ input[type=text], select{
     border-radius: 5px;
     padding: 2px;
     outline-color: #555;
-    text-align: center;
+    text-align: left;
     width: 50%;
 }
 

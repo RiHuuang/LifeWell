@@ -25,9 +25,22 @@
     <input type="number" id="age" name="age" required>
     <br>
 
-    <label for="gender">Gender (Female / Male)</label>
-    <input type="text" id="gender" name="gender" required>
+    <label for="gender">Gender (Male / Female)</label>
+    <div class="radio-container">
+      <div class ="kotakan">
+        <input type="radio" name="gender" id="male" value="male" required="required"/>
+        <label for="male">Male</label>
+      </div>
+        
+      <div class ="kotakan">
+      <input type="radio" name="gender" id="female" value="female"/>
+      <label for="female">Female</label>
+      </div>
+    </div>
+    
     <br>
+
+
 
     <label for="password">Password</label>
     <input type="password" id="password" name="password" required>
