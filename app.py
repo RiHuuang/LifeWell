@@ -238,8 +238,10 @@ def daily_meals():
 
     if request.method == 'POST':
         print('jalan')
+        print('HAO HAO HAO HAO')
         timeFrame = request.form.getlist('timeFrame')
         targetCalories = request.form.getlist('goals')
+        print('ini target kalo :', targetCalories)
         diet = request.form.getlist('diet')
         exclude = request.form.getlist('exclude')
 
@@ -262,7 +264,8 @@ def daily_meals():
             return redirect(url_for('daily_meals'))
 
         # datas = get_meal_plan(timeFrame, targetCalories, diet, exclude)
-        return redirect(url_for('get_meal', timeFrame=timeFrame, targetCalories=targetCalories, diet=diet, exclude=exclude))
+        # return redirect(url_for('get_meal', timeFrame=timeFrame, targetCalories=targetCalories, diet=diet, exclude=exclude))
+        return redirect(url_for('summary', timeFrame = timeFrame, targetCalories = targetCalories))
 
     return render_template('daily_meals.html', formatted_calories=formatted_calories, options=options)
 
@@ -278,9 +281,10 @@ def get_meal():
     
     datas = get_meal_plan(
         timeFrame=timeFrame, targetCalories=targetCalories, diet=diet, exclude=exclude)
-    # print("->>>>> datas ",datas)
+    print("->>>>> datas ",datas)
     
     session['goals'] = goals
+    
 
     image_datas = dict({})
     for meal in datas['meals']:
@@ -306,9 +310,7 @@ def summary():
     activity = session.get('activity', None)
 
     calories = float("{:.2f}".format(float(calculate_daily_calories(bmr, activity))))
-    # protein = (1.2 * weight)
-    # print("berat badan : ",weight)
-    # print(protein)
+
     print(age)
     if(age >= 1 and age <= 3):
         mineral = '700 mg'
@@ -318,15 +320,15 @@ def summary():
         mineral = '1300 mg'
 
     protein = weight * 1.2
-    targetCalories = session.get('goals')
-    print("ini target",targetCalories)
-    initarget = targetCalories[0]
-    targetCalories = float(initarget)
+    targetCalories = request.args.get('targetCalories')
+    print("ini target ::=::>>",targetCalories)
+    # initarget = request.args.getlist('targetCalories')
+    initarget = float(targetCalories[0])
     print(type(targetCalories))
     print(type(calories))
-    if(calories < targetCalories):
+    if(calories < initarget):
         karbo = "{:.2f}".format((0.65 * calories)/4)
-    elif (calories > targetCalories):
+    elif (calories > initarget):
         karbo = "{:.2f}".format((0.4 * calories)/4)
     
     fat = "{:.2f}".format((0.2 * calories)/9)
