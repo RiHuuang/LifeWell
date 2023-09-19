@@ -286,6 +286,7 @@ def get_meal():
 
     image_datas = dict({})
     for meal in datas['meals']:
+        # print(meal)
         title = meal['title']
         print("ini title", title)
         image_datas[meal['title']] = get_meal_image(title)
@@ -328,7 +329,7 @@ def summary():
     print(type(calories))
     if(calories < targetCalories):
         karbo = "{:.2f}".format((0.65 * calories)/4)
-    elif (calories > targetCalories):
+    else :
         karbo = "{:.2f}".format((0.4 * calories)/4)
     
     fat = "{:.2f}".format((0.2 * calories)/9)
